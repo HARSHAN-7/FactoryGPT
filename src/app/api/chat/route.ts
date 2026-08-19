@@ -31,9 +31,9 @@ export async function POST(req: NextRequest) {
     // 3. Tabular Math Computation check
     const tabularResult = processTabularQuery(queryText);
 
-    // 4. Query Embedding & pgvector Retrieval
+    // 4. Query Embedding & pgvector Retrieval (Pass queryText for dynamic context resolution)
     const queryEmbedding = await generateEmbedding(queryText);
-    const retrievedChunks = await searchSimilarChunks(queryEmbedding, 4, 0.45);
+    const retrievedChunks = await searchSimilarChunks(queryEmbedding, 4, 0.45, queryText);
 
     // Inject tabular math computation if applicable
     if (tabularResult.isTabularQuery && tabularResult.computedResult) {
