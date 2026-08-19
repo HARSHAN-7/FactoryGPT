@@ -7,20 +7,20 @@
   --foreground: #0f172a;
 }
 
-.light {
+.light, .dark {
   --background: #f8fafc;
   --foreground: #0f172a;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: #0f172a !important;
+  background: #f8fafc !important;
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Luxury Light Scrollbars */
+/* Custom Pure Light Scrollbars */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -42,8 +42,8 @@ body {
 /* Fine Grid Pattern on Light Background */
 .bg-grid-pattern {
   background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -57,16 +57,7 @@ body {
   animation: statusPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Soft Ambient Gold Glow for Light Theme */
+/* Soft Ambient Light Theme Elevation & Shadows */
 .gold-glow {
-  box-shadow: 0 20px 40px -15px rgba(217, 119, 6, 0.15), 0 0 25px 0 rgba(0, 0, 0, 0.04);
-}
-
-.card-hover-effect {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover-effect:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.08), 0 0 15px -3px rgba(217, 119, 6, 0.12);
 }

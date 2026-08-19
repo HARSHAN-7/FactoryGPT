@@ -39,20 +39,20 @@ export default function AdminDashboardPage() {
   const failedDocs = documents.filter(d => d.status === 'failed').length;
 
   return (
-    <div className="flex h-screen bg-industrial-950 text-industrial-100 overflow-hidden font-sans bg-grid-pattern">
+    <div className="flex h-screen bg-slate-50 text-slate-900 overflow-hidden font-sans bg-grid-pattern">
       {/* Admin Sidebar Navigation */}
       <AdminSidebar />
 
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-8">
         {/* Header Title */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-industrial-800 pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-6">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-              <Cpu className="w-6 h-6 text-accent-orange" />
+            <h1 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              <Cpu className="w-6 h-6 text-amber-600" />
               Factory Intelligence Dashboard
             </h1>
-            <p className="text-xs text-industrial-400 mt-1 font-mono">
+            <p className="text-xs text-slate-600 mt-1 font-mono">
               Live manufacturing telemetry, machine status, vector store health, and document indexing overview.
             </p>
           </div>
@@ -70,54 +70,54 @@ export default function AdminDashboardPage() {
 
         {/* Real Database Metrics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card accentBorder>
+          <Card accentBorder className="bg-white border-slate-200 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase text-industrial-400">Total Machinery</span>
-              <Wrench className="w-4 h-4 text-accent-orange" />
+              <span className="text-xs font-mono uppercase text-slate-500">Total Machinery</span>
+              <Wrench className="w-4 h-4 text-amber-600" />
             </div>
-            <div className="text-3xl font-bold font-mono text-white mt-2">
+            <div className="text-3xl font-bold font-mono text-slate-900 mt-2">
               {machines.length}
             </div>
-            <div className="text-[11px] text-industrial-400 mt-1 font-mono">
-              <span className="text-emerald-400 font-bold">{operationalCount} Operational</span> | {maintenanceCount} Maintenance
+            <div className="text-[11px] text-slate-600 mt-1 font-mono">
+              <span className="text-emerald-700 font-bold">{operationalCount} Operational</span> | {maintenanceCount} Maintenance
             </div>
           </Card>
 
-          <Card>
+          <Card className="bg-white border-slate-200 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase text-industrial-400">Total Documents</span>
-              <FileText className="w-4 h-4 text-industrial-400" />
+              <span className="text-xs font-mono uppercase text-slate-500">Total Documents</span>
+              <FileText className="w-4 h-4 text-slate-500" />
             </div>
-            <div className="text-3xl font-bold font-mono text-white mt-2">
+            <div className="text-3xl font-bold font-mono text-slate-900 mt-2">
               {documents.length}
             </div>
-            <div className="text-[11px] text-industrial-400 mt-1 font-mono">
-              <span className="text-emerald-400 font-bold">{completedDocs} Indexed</span> | {failedDocs} Failed
+            <div className="text-[11px] text-slate-600 mt-1 font-mono">
+              <span className="text-emerald-700 font-bold">{completedDocs} Indexed</span> | {failedDocs} Failed
             </div>
           </Card>
 
-          <Card>
+          <Card className="bg-white border-slate-200 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase text-industrial-400">Total Conversations</span>
-              <MessageSquare className="w-4 h-4 text-emerald-400" />
+              <span className="text-xs font-mono uppercase text-slate-500">Total Conversations</span>
+              <MessageSquare className="w-4 h-4 text-emerald-600" />
             </div>
-            <div className="text-3xl font-bold font-mono text-emerald-400 mt-2">
+            <div className="text-3xl font-bold font-mono text-emerald-700 mt-2">
               142
             </div>
-            <div className="text-[11px] text-industrial-400 mt-1 font-mono">
+            <div className="text-[11px] text-slate-600 mt-1 font-mono">
               18 Questions Today
             </div>
           </Card>
 
-          <Card>
+          <Card className="bg-white border-slate-200 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase text-industrial-400">Knowledge Base Health</span>
-              <HardDrive className="w-4 h-4 text-accent-orange" />
+              <span className="text-xs font-mono uppercase text-slate-500">Knowledge Base Health</span>
+              <HardDrive className="w-4 h-4 text-amber-600" />
             </div>
-            <div className="text-3xl font-bold font-mono text-white mt-2">
+            <div className="text-3xl font-bold font-mono text-slate-900 mt-2">
               98.4%
             </div>
-            <div className="text-[11px] text-industrial-400 mt-1 font-mono">
+            <div className="text-[11px] text-slate-600 mt-1 font-mono">
               Vector Index Size: 412 MB
             </div>
           </Card>
@@ -125,17 +125,17 @@ export default function AdminDashboardPage() {
 
         {/* System Telemetry & Quick Links */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-industrial-900 border-industrial-800">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Wrench className="w-4 h-4 text-accent-orange" />
+          <Card className="bg-white border-slate-200 shadow-sm">
+            <CardHeader className="border-b border-slate-100">
+              <CardTitle className="flex items-center gap-2 text-slate-900">
+                <Wrench className="w-4 h-4 text-amber-600" />
                 Equipment Inventory Summary
               </CardTitle>
             </CardHeader>
-            <div className="space-y-2 font-mono text-xs text-industrial-300">
-              <div className="flex justify-between"><span>Operational Machines:</span><span className="text-emerald-400 font-bold">{operationalCount}</span></div>
-              <div className="flex justify-between"><span>In Scheduled Service:</span><span className="text-blue-400 font-bold">{maintenanceCount}</span></div>
-              <div className="flex justify-between"><span>Warning Alerts:</span><span className="text-amber-400 font-bold">1</span></div>
+            <div className="space-y-2 font-mono text-xs text-slate-700">
+              <div className="flex justify-between"><span>Operational Machines:</span><span className="text-emerald-700 font-bold">{operationalCount}</span></div>
+              <div className="flex justify-between"><span>In Scheduled Service:</span><span className="text-blue-700 font-bold">{maintenanceCount}</span></div>
+              <div className="flex justify-between"><span>Warning Alerts:</span><span className="text-amber-700 font-bold">1</span></div>
               <div className="pt-2">
                 <Link href="/admin/machines">
                   <Button variant="outline" size="sm" className="w-full">Manage Machinery Inventory</Button>
@@ -144,17 +144,17 @@ export default function AdminDashboardPage() {
             </div>
           </Card>
 
-          <Card className="bg-industrial-900 border-industrial-800">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Database className="w-4 h-4 text-emerald-400" />
+          <Card className="bg-white border-slate-200 shadow-sm">
+            <CardHeader className="border-b border-slate-100">
+              <CardTitle className="flex items-center gap-2 text-slate-900">
+                <Database className="w-4 h-4 text-emerald-600" />
                 Knowledge Base Health Summary
               </CardTitle>
             </CardHeader>
-            <div className="space-y-2 font-mono text-xs text-industrial-300">
-              <div className="flex justify-between"><span>Indexed Manuals:</span><span className="text-white font-bold">{completedDocs}</span></div>
-              <div className="flex justify-between"><span>Total Vector Chunks:</span><span className="text-white font-bold">{completedDocs * 12 + 48}</span></div>
-              <div className="flex justify-between"><span>Vector Model:</span><span className="text-accent-orange font-bold">Gemini 768-D</span></div>
+            <div className="space-y-2 font-mono text-xs text-slate-700">
+              <div className="flex justify-between"><span>Indexed Manuals:</span><span className="text-slate-900 font-bold">{completedDocs}</span></div>
+              <div className="flex justify-between"><span>Total Vector Chunks:</span><span className="text-slate-900 font-bold">{completedDocs * 12 + 48}</span></div>
+              <div className="flex justify-between"><span>Vector Model:</span><span className="text-amber-700 font-bold">Gemini 768-D</span></div>
               <div className="pt-2">
                 <Link href="/admin/knowledge-base">
                   <Button variant="outline" size="sm" className="w-full">View Vector Store Telemetry</Button>
@@ -163,17 +163,17 @@ export default function AdminDashboardPage() {
             </div>
           </Card>
 
-          <Card className="bg-industrial-900 border-industrial-800">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-accent-orange" />
+          <Card className="bg-white border-slate-200 shadow-sm">
+            <CardHeader className="border-b border-slate-100">
+              <CardTitle className="flex items-center gap-2 text-slate-900">
+                <BarChart3 className="w-4 h-4 text-amber-600" />
                 AI Analytics Summary
               </CardTitle>
             </CardHeader>
-            <div className="space-y-2 font-mono text-xs text-industrial-300">
-              <div className="flex justify-between"><span>Supported Languages:</span><span className="text-white font-bold">EN | TA | HI</span></div>
-              <div className="flex justify-between"><span>Top Intent:</span><span className="text-white font-bold">Maintenance (38%)</span></div>
-              <div className="flex justify-between"><span>Grounded Rate:</span><span className="text-emerald-400 font-bold">96.8%</span></div>
+            <div className="space-y-2 font-mono text-xs text-slate-700">
+              <div className="flex justify-between"><span>Supported Languages:</span><span className="text-slate-900 font-bold">EN | TA | HI</span></div>
+              <div className="flex justify-between"><span>Top Intent:</span><span className="text-slate-900 font-bold">Maintenance (38%)</span></div>
+              <div className="flex justify-between"><span>Grounded Rate:</span><span className="text-emerald-700 font-bold">96.8%</span></div>
               <div className="pt-2">
                 <Link href="/admin/analytics">
                   <Button variant="outline" size="sm" className="w-full">View Detailed AI Analytics</Button>
@@ -186,11 +186,11 @@ export default function AdminDashboardPage() {
         {/* Recent Ingested Documents Table Preview */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
               Recent Ingested Factory Documents
             </h3>
             <Link href="/admin/documents">
-              <Button variant="ghost" size="sm" className="text-xs font-mono text-accent-orange">
+              <Button variant="ghost" size="sm" className="text-xs font-mono text-amber-700">
                 View All Documents ({documents.length})
               </Button>
             </Link>

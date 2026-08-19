@@ -125,15 +125,15 @@ export function VoiceControlModal({
     >
       <div className="space-y-6 text-center py-2">
         {/* Language Selector in Modal */}
-        <div className="flex items-center justify-between p-3 bg-industrial-850 rounded border border-industrial-800 text-xs font-mono">
-          <div className="flex items-center gap-2 text-industrial-300">
-            <Languages className="w-4 h-4 text-accent-orange" />
+        <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs font-mono">
+          <div className="flex items-center gap-2 text-slate-700 font-medium">
+            <Languages className="w-4 h-4 text-amber-600" />
             <span>Voice Language:</span>
           </div>
           <select
             value={selectedLanguage}
             onChange={(e) => onLanguageChange(e.target.value as SupportedLanguage)}
-            className="bg-industrial-900 border border-industrial-700 rounded px-2 py-1 text-industrial-100 font-mono focus:outline-none focus:border-accent-orange cursor-pointer"
+            className="bg-white border border-slate-300 rounded px-2 py-1 text-slate-900 font-mono focus:outline-none focus:border-amber-600 cursor-pointer shadow-xs"
           >
             <option value="en">English (en-US)</option>
             <option value="ta">தமிழ் (ta-IN)</option>
@@ -143,7 +143,7 @@ export function VoiceControlModal({
 
         {/* Error Alert */}
         {errorMessage && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded text-xs font-mono text-red-700 flex items-start gap-2 text-left">
+          <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-xs font-mono text-red-700 flex items-start gap-2 text-left">
             <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
             <div>{errorMessage}</div>
           </div>
@@ -152,17 +152,17 @@ export function VoiceControlModal({
         {/* Interactive Microphone Button with Pulse Ring */}
         <div className="relative mx-auto w-24 h-24 flex items-center justify-center">
           {voiceState === 'listening' && (
-            <span className="absolute inset-0 rounded-full border-2 border-accent-orange animate-ping opacity-75" />
+            <span className="absolute inset-0 rounded-full border-2 border-amber-500 animate-ping opacity-75" />
           )}
 
           <button
             onClick={handleToggleListening}
             className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg ${
               voiceState === 'listening'
-                ? 'bg-accent-orange text-white shadow-orange-500/30 scale-105'
+                ? 'bg-amber-500 text-slate-950 shadow-amber-500/30 scale-105'
                 : voiceState === 'speaking'
                 ? 'bg-emerald-600 text-white shadow-emerald-500/30'
-                : 'bg-industrial-900 border-2 border-industrial-700 text-industrial-300 hover:border-accent-orange hover:text-industrial-100'
+                : 'bg-white border-2 border-slate-300 text-slate-700 hover:border-amber-500 hover:text-slate-950'
             }`}
             title={voiceState === 'listening' ? 'Click to Stop Listening' : 'Click to Speak'}
           >
@@ -171,7 +171,7 @@ export function VoiceControlModal({
             ) : voiceState === 'speaking' ? (
               <Volume2 className="w-10 h-10 animate-bounce" />
             ) : (
-              <Mic className="w-10 h-10" />
+              <Mic className="w-10 h-10 text-amber-600" />
             )}
           </button>
         </div>
@@ -203,12 +203,12 @@ export function VoiceControlModal({
         </div>
 
         {/* Live Transcribed Speech Preview Box */}
-        <div className="p-4 bg-industrial-850 rounded border border-industrial-800 text-left min-h-[70px] space-y-1">
-          <div className="text-[10px] font-mono text-industrial-500 uppercase tracking-wider">
+        <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 text-left min-h-[70px] space-y-1">
+          <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
             Recognized Operator Speech:
           </div>
-          <div className="text-sm font-sans text-industrial-100 min-h-[30px] italic">
-            {transcriptText ? `"${transcriptText}"` : <span className="text-industrial-500 font-mono text-xs">Waiting for speech input...</span>}
+          <div className="text-sm font-sans text-slate-900 min-h-[30px] italic">
+            {transcriptText ? `"${transcriptText}"` : <span className="text-slate-400 font-mono text-xs">Waiting for speech input...</span>}
           </div>
         </div>
 
@@ -221,7 +221,7 @@ export function VoiceControlModal({
           ) : transcriptText.trim() ? (
             <Button
               variant="primary"
-              className="w-full"
+              className="w-full bg-amber-500 text-slate-950 font-bold"
               onClick={() => handleSubmitVoiceQuery(transcriptText)}
               icon={<ArrowRight className="w-4 h-4" />}
             >

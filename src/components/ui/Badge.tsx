@@ -8,21 +8,21 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export function Badge({ className, variant = 'slate', dot = false, children, ...props }: BadgeProps) {
   const variants = {
-    indexed: 'bg-emerald-950/80 text-emerald-400 border-emerald-800/60',
-    processing: 'bg-blue-950/80 text-blue-400 border-blue-800/60',
-    failed: 'bg-red-950/80 text-red-400 border-red-800/60',
-    orange: 'bg-orange-950/80 text-orange-400 border-orange-800/60',
-    outline: 'bg-industrial-900 text-industrial-300 border-industrial-700',
-    slate: 'bg-industrial-800 text-industrial-200 border-industrial-700',
+    indexed: 'bg-emerald-50 text-emerald-800 border-emerald-300',
+    processing: 'bg-blue-50 text-blue-800 border-blue-300',
+    failed: 'bg-red-50 text-red-800 border-red-300',
+    orange: 'bg-amber-50 text-amber-800 border-amber-300',
+    outline: 'bg-white text-slate-700 border-slate-300',
+    slate: 'bg-slate-100 text-slate-800 border-slate-300',
   };
 
   const dotColors = {
-    indexed: 'bg-emerald-400',
-    processing: 'bg-blue-400 animate-pulse',
-    failed: 'bg-red-400',
-    orange: 'bg-orange-400',
-    outline: 'bg-industrial-400',
-    slate: 'bg-industrial-400',
+    indexed: 'bg-emerald-600',
+    processing: 'bg-blue-600 animate-pulse',
+    failed: 'bg-red-600',
+    orange: 'bg-amber-600',
+    outline: 'bg-slate-500',
+    slate: 'bg-slate-500',
   };
 
   return (

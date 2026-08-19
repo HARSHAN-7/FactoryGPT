@@ -23,22 +23,25 @@ export function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-industrial-900 border-r border-industrial-800 text-industrial-200 h-screen sticky top-0 flex flex-col justify-between shrink-0 font-sans shadow-sm">
+    <aside className="w-64 bg-white border-r border-slate-200 text-slate-900 h-screen sticky top-0 flex flex-col justify-between shrink-0 font-sans shadow-sm">
       <div>
         {/* Brand Header with Official Logo */}
-        <div className="p-4 border-b border-industrial-800 flex items-center justify-between bg-industrial-900">
+        <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-white">
           <Link href="/" className="flex items-center gap-2.5 group">
             <img
               src="/logo.png"
               alt="FactoryGPT Official Logo"
               className="h-9 w-auto object-contain rounded"
             />
+            <span className="font-extrabold text-base text-slate-900 tracking-tight font-sans">
+              Factory<span className="text-amber-600">GPT</span>
+            </span>
           </Link>
         </div>
 
         {/* Navigation Items */}
         <nav className="p-3 space-y-1">
-          <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-industrial-500">
+          <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
             Plant Administration
           </div>
           {navItems.map((item) => {
@@ -50,11 +53,11 @@ export function AdminSidebar() {
                 className={cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-md text-xs font-mono transition-colors',
                   isActive
-                    ? 'bg-gold-600/10 text-gold-500 font-bold border border-gold-500/30'
-                    : 'text-industrial-400 hover:bg-industrial-850 hover:text-white'
+                    ? 'bg-amber-50 text-amber-900 font-bold border border-amber-300'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 )}
               >
-                <span className={isActive ? 'text-gold-500' : ''}>{item.icon}</span>
+                <span className={isActive ? 'text-amber-600' : ''}>{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
             );
@@ -63,14 +66,14 @@ export function AdminSidebar() {
       </div>
 
       {/* Footer Controls */}
-      <div className="p-3 border-t border-industrial-800 space-y-2 bg-industrial-900">
+      <div className="p-3 border-t border-slate-200 space-y-2 bg-white">
         <Link href="/chat">
-          <Button variant="primary" size="sm" className="w-full justify-start font-mono text-xs" icon={<MessageSquare className="w-4 h-4" />}>
+          <Button variant="primary" size="sm" className="w-full justify-start font-mono text-xs bg-amber-500 text-slate-950 font-bold" icon={<MessageSquare className="w-4 h-4" />}>
             Open Assistant Chat
           </Button>
         </Link>
         <Link href="/">
-          <Button variant="ghost" size="sm" className="w-full justify-start font-mono text-xs text-industrial-500 hover:text-white" icon={<ArrowLeft className="w-4 h-4" />}>
+          <Button variant="ghost" size="sm" className="w-full justify-start font-mono text-xs text-slate-500 hover:text-slate-900 hover:bg-slate-100" icon={<ArrowLeft className="w-4 h-4" />}>
             Return to Landing
           </Button>
         </Link>

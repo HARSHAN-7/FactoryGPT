@@ -13,17 +13,17 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         industrial: {
-          950: "#ffffff", // Pure Crisp White
-          900: "#f8fafc", // Very Light Slate
-          850: "#f1f5f9", // Soft Light Gray
-          800: "#e2e8f0", // Light Border Gray
-          700: "#cbd5e1", // Slate Gray Border
-          600: "#94a3b8", // Subtitle Gray
-          500: "#64748b", // Body Text Gray
-          400: "#334155", // Dark Slate Text
-          300: "#1e293b", // Deep Charcoal Text
-          200: "#0f172a", // High Contrast Black
-          100: "#020617", // Pure Black
+          950: "#ffffff", // Pure Crisp White Background
+          900: "#f8fafc", // Soft Slate Canvas
+          850: "#f1f5f9", // Light Card Surface
+          800: "#e2e8f0", // Subtle Slate Border
+          700: "#cbd5e1", // Medium Border
+          600: "#94a3b8", // Muted Gray
+          500: "#64748b", // Secondary Body Text
+          400: "#475569", // Dark Slate Text
+          300: "#334155", // Subheading Dark
+          200: "#1e293b", // Heading Dark
+          100: "#0f172a", // High Contrast Black
         },
         gold: {
           500: "#d97706",
@@ -49,7 +49,7 @@ const config: Config = {
         sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
       },
       backgroundImage: {
-        'industrial-grid': "radial-gradient(circle, rgba(15, 23, 42, 0.04) 1px, transparent 1px)",
+        'industrial-grid': "radial-gradient(circle, rgba(15, 23, 42, 0.035) 1px, transparent 1px)",
       },
     },
   },

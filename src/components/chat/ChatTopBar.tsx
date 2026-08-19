@@ -19,21 +19,21 @@ export function ChatTopBar({
   onLanguageChange
 }: ChatTopBarProps) {
   return (
-    <header className="h-14 border-b border-industrial-800 bg-industrial-900 px-4 flex items-center justify-between shrink-0 shadow-sm">
+    <header className="h-14 border-b border-slate-200 bg-white px-4 flex items-center justify-between shrink-0 shadow-xs">
       {/* Left items: Mobile toggle & Title */}
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenMobileSidebar}
-          className="md:hidden p-1.5 rounded text-industrial-500 hover:text-industrial-100 hover:bg-industrial-850"
+          className="md:hidden p-1.5 rounded text-slate-600 hover:text-slate-900 hover:bg-slate-100"
           aria-label="Open Conversation History"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-2.5">
-          <h1 className="font-mono text-sm font-bold text-industrial-100 tracking-wide flex items-center gap-2">
+          <h1 className="font-mono text-sm font-bold text-slate-900 tracking-wide flex items-center gap-2">
             <span>FACTORYGPT</span>
-            <span className="hidden sm:inline-block text-industrial-600">|</span>
+            <span className="hidden sm:inline-block text-slate-400">|</span>
           </h1>
           {/* Status Indicator */}
           <div className="hidden sm:flex items-center gap-1.5">
@@ -47,11 +47,11 @@ export function ChatTopBar({
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Multilingual Selector */}
         <div className="relative flex items-center">
-          <Languages className="w-3.5 h-3.5 text-accent-orange absolute left-2 pointer-events-none" />
+          <Languages className="w-3.5 h-3.5 text-amber-600 absolute left-2.5 pointer-events-none" />
           <select
             value={selectedLanguage}
             onChange={(e) => onLanguageChange(e.target.value)}
-            className="h-8 pl-7 pr-3 bg-industrial-950 border border-industrial-700 rounded text-xs font-mono text-industrial-100 focus:outline-none focus:border-accent-orange cursor-pointer"
+            className="h-8 pl-8 pr-3 bg-slate-50 border border-slate-300 rounded-md text-xs font-mono text-slate-900 focus:outline-none focus:border-amber-600 cursor-pointer shadow-xs"
           >
             <option value="auto">Auto Detect (தானியங்கி / स्वचालित)</option>
             <option value="en">English (English)</option>
@@ -60,13 +60,13 @@ export function ChatTopBar({
           </select>
         </div>
 
-        {/* Voice button placeholder */}
+        {/* Voice button */}
         <Button
           variant="outline"
           size="sm"
           onClick={onOpenVoiceModal}
-          icon={<Mic className="w-3.5 h-3.5 text-accent-orange" />}
-          className="hidden sm:flex text-xs font-mono"
+          icon={<Mic className="w-3.5 h-3.5 text-amber-600" />}
+          className="hidden sm:flex text-xs font-mono text-slate-800"
         >
           Voice AI
         </Button>
@@ -76,7 +76,7 @@ export function ChatTopBar({
           <Button
             variant="ghost"
             size="sm"
-            className="p-1.5 text-industrial-500 hover:text-industrial-100"
+            className="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100"
             title="System Settings"
           >
             <Settings className="w-4 h-4" />

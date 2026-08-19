@@ -30,18 +30,18 @@ export function Dialog({ isOpen, onClose, title, description, children }: Dialog
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-industrial-900 border border-industrial-700 rounded-lg shadow-2xl overflow-hidden text-industrial-100">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-industrial-800 bg-industrial-950">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden text-slate-900">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
           <div>
-            <h3 className="text-base font-semibold tracking-wide text-industrial-100 flex items-center gap-2">
+            <h3 className="text-base font-semibold tracking-wide text-slate-900 flex items-center gap-2">
               {title}
             </h3>
-            {description && <p className="text-xs text-industrial-400 mt-0.5">{description}</p>}
+            {description && <p className="text-xs text-slate-500 mt-0.5">{description}</p>}
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded text-industrial-400 hover:text-white hover:bg-industrial-800 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-200 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>

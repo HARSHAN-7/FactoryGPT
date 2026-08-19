@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { CheckCircle2, ArrowRight, Zap, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { LandingNav } from '@/components/navigation/LandingNav';
 
 export default function PricingPage() {
@@ -57,18 +57,18 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-industrial-950 text-industrial-100 flex flex-col font-sans bg-grid-pattern">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans bg-grid-pattern">
       <LandingNav />
 
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16 w-full">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-industrial-900 border border-gold-500/30 text-xs text-gold-500 font-mono">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-amber-500/40 text-xs text-amber-800 font-mono shadow-sm">
             <span>TRANSPARENT PRICING</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Flexible Plans for <span className="text-gold-500">Every Plant Size</span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+            Flexible Plans for <span className="text-amber-600">Every Plant Size</span>
           </h1>
-          <p className="text-base sm:text-lg text-industrial-400">
+          <p className="text-base sm:text-lg text-slate-600">
             Transparent pricing with zero hidden fees. Scale your factory intelligence effortlessly.
           </p>
         </div>
@@ -77,31 +77,31 @@ export default function PricingPage() {
           {plans.map((p) => (
             <div
               key={p.name}
-              className={`p-8 rounded-2xl bg-industrial-900 border ${
-                p.popular ? 'border-gold-500 gold-glow relative' : 'border-industrial-800'
-              } space-y-6 flex flex-col justify-between shadow-2xl`}
+              className={`p-8 rounded-2xl bg-white border ${
+                p.popular ? 'border-amber-500 gold-glow relative' : 'border-slate-200'
+              } space-y-6 flex flex-col justify-between shadow-xl`}
             >
               {p.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gold-600 text-industrial-950 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-amber-500 text-slate-950 text-[10px] font-mono font-bold uppercase tracking-wider shadow-sm">
                   MOST POPULAR PLAN
                 </span>
               )}
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">{p.name}</h3>
-                  <p className="text-xs text-industrial-400 mt-1">{p.description}</p>
+                  <h3 className="text-2xl font-bold text-slate-900 tracking-tight">{p.name}</h3>
+                  <p className="text-xs text-slate-600 mt-1">{p.description}</p>
                 </div>
 
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-extrabold font-mono text-white">{p.price}</span>
-                  <span className="text-xs text-industrial-400 font-mono">{p.period}</span>
+                  <span className="text-4xl font-extrabold font-mono text-slate-900">{p.price}</span>
+                  <span className="text-xs text-slate-500 font-mono">{p.period}</span>
                 </div>
 
-                <div className="space-y-2 pt-4 border-t border-industrial-800 text-xs font-mono text-industrial-300">
+                <div className="space-y-2 pt-4 border-t border-slate-100 text-xs font-mono text-slate-700">
                   {p.features.map((f) => (
                     <div key={f} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
                       <span>{f}</span>
                     </div>
                   ))}
@@ -112,8 +112,8 @@ export default function PricingPage() {
                 <button
                   className={`w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                     p.popular
-                      ? 'bg-gold-600 hover:bg-gold-700 text-industrial-950 shadow-xl shadow-gold-600/25'
-                      : 'bg-industrial-850 hover:bg-industrial-800 text-white border border-industrial-700'
+                      ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-md shadow-amber-500/25'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300'
                   }`}
                 >
                   <span>{p.buttonText}</span>

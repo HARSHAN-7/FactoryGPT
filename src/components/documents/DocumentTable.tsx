@@ -32,13 +32,13 @@ export function DocumentTable({ documents, onDeleteDocument, onReindexDocument }
     switch (type) {
       case 'CSV':
       case 'XLSX':
-        return <FileSpreadsheet className="w-4 h-4 text-emerald-400" />;
+        return <FileSpreadsheet className="w-4 h-4 text-emerald-600" />;
       case 'DOCX':
-        return <FileCode className="w-4 h-4 text-blue-400" />;
+        return <FileCode className="w-4 h-4 text-blue-600" />;
       case 'TXT':
-        return <File className="w-4 h-4 text-amber-400" />;
+        return <File className="w-4 h-4 text-amber-600" />;
       default:
-        return <FileText className="w-4 h-4 text-accent-orange" />;
+        return <FileText className="w-4 h-4 text-amber-600" />;
     }
   };
 
@@ -56,16 +56,16 @@ export function DocumentTable({ documents, onDeleteDocument, onReindexDocument }
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 font-sans">
       {/* Search & Filter Controls */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-industrial-900 p-3 rounded-lg border border-industrial-800">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
         <div className="w-full sm:w-72">
           <Input
             placeholder="Search documents by name or uploader..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             icon={<Search className="w-3.5 h-3.5" />}
-            className="text-xs bg-industrial-950"
+            className="text-xs bg-slate-50"
           />
         </div>
 
@@ -77,8 +77,8 @@ export function DocumentTable({ documents, onDeleteDocument, onReindexDocument }
               onClick={() => setStatusFilter(status)}
               className={`px-2.5 py-1 rounded text-[11px] font-mono transition-colors uppercase ${
                 statusFilter === status
-                  ? 'bg-industrial-700 text-white font-bold border border-industrial-600'
-                  : 'bg-industrial-950 text-industrial-400 hover:text-white border border-industrial-800'
+                  ? 'bg-amber-500 text-slate-950 font-bold border border-amber-600'
+                  : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200'
               }`}
             >
               {status}
@@ -88,43 +88,43 @@ export function DocumentTable({ documents, onDeleteDocument, onReindexDocument }
       </div>
 
       {/* Table Container */}
-      <div className="bg-industrial-900 border border-industrial-800 rounded-lg overflow-hidden shadow-md">
+      <div className="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-xs">
         {/* Desktop View */}
         <div className="hidden md:block overflow-x-auto">
-          <table className="w-full text-left text-xs text-industrial-200">
-            <thead className="bg-industrial-950 text-[11px] font-mono text-industrial-400 uppercase tracking-wider border-b border-industrial-800">
+          <table className="w-full text-left text-xs text-slate-800">
+            <thead className="bg-slate-50 text-[11px] font-mono text-slate-500 uppercase tracking-wider border-b border-slate-200">
               <tr>
-                <th className="px-4 py-3">File Name</th>
-                <th className="px-4 py-3">Type</th>
-                <th className="px-4 py-3">Size</th>
-                <th className="px-4 py-3">Ingestion Status</th>
-                <th className="px-4 py-3">Storage Path</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                <th className="px-4 py-3 font-semibold">File Name</th>
+                <th className="px-4 py-3 font-semibold">Type</th>
+                <th className="px-4 py-3 font-semibold">Size</th>
+                <th className="px-4 py-3 font-semibold">Ingestion Status</th>
+                <th className="px-4 py-3 font-semibold">Storage Path</th>
+                <th className="px-4 py-3 text-right font-semibold">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-industrial-800/60">
+            <tbody className="divide-y divide-slate-100">
               {filteredDocs.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-4 py-8 text-center text-industrial-500 font-mono">
+                  <td colSpan={6} className="px-4 py-8 text-center text-slate-500 font-mono">
                     No documents matching criteria in Supabase Storage
                   </td>
                 </tr>
               ) : (
                 filteredDocs.map((doc) => (
-                  <tr key={doc.id} className="hover:bg-industrial-850/60 transition-colors">
+                  <tr key={doc.id} className="hover:bg-slate-50 transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2.5">
                         {getTypeIcon(doc.file_type)}
                         <div>
-                          <div className="font-medium text-white hover:text-accent-orange transition-colors cursor-pointer truncate max-w-xs">
+                          <div className="font-semibold text-slate-900 hover:text-amber-700 transition-colors cursor-pointer truncate max-w-xs">
                             {doc.filename || doc.original_filename}
                           </div>
                           {doc.processing_error ? (
-                            <div className="text-[10px] text-red-400 font-mono">
+                            <div className="text-[10px] text-red-600 font-mono">
                               Error: {doc.processing_error}
                             </div>
                           ) : (
-                            <div className="text-[10px] text-industrial-400 font-mono">
+                            <div className="text-[10px] text-slate-500 font-mono">
                               By {doc.uploaderName || 'Eng. Sarah Jenkins'}
                             </div>
                           )}
@@ -132,11 +132,11 @@ export function DocumentTable({ documents, onDeleteDocument, onReindexDocument }
                       </div>
                     </td>
                     <td className="px-4 py-3 font-mono">{doc.file_type}</td>
-                    <td className="px-4 py-3 font-mono text-industrial-300">
+                    <td className="px-4 py-3 font-mono text-slate-600">
                       {doc.sizeFormatted || `${(doc.file_size / 1024).toFixed(0)} KB`}
                     </td>
                     <td className="px-4 py-3">{renderStatusBadge(doc.status)}</td>
-                    <td className="px-4 py-3 font-mono text-[11px] text-industrial-400 truncate max-w-[180px]">
+                    <td className="px-4 py-3 font-mono text-[11px] text-slate-500 truncate max-w-[180px]">
                       {doc.storage_path}
                     </td>
                     <td className="px-4 py-3 text-right">
@@ -144,14 +144,14 @@ export function DocumentTable({ documents, onDeleteDocument, onReindexDocument }
                         <button
                           onClick={() => onReindexDocument(doc.id)}
                           title="Re-sync metadata"
-                          className="p-1.5 rounded hover:bg-industrial-800 text-industrial-400 hover:text-accent-orange transition-colors"
+                          className="p-1.5 rounded hover:bg-slate-100 text-slate-500 hover:text-amber-600 transition-colors"
                         >
                           <RefreshCw className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => onDeleteDocument(doc.id, doc.storage_path)}
                           title="Delete file from bucket and database"
-                          className="p-1.5 rounded hover:bg-red-950 text-industrial-400 hover:text-red-400 transition-colors"
+                          className="p-1.5 rounded hover:bg-red-50 text-slate-500 hover:text-red-600 transition-colors"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -165,23 +165,23 @@ export function DocumentTable({ documents, onDeleteDocument, onReindexDocument }
         </div>
 
         {/* Mobile View */}
-        <div className="md:hidden divide-y divide-industrial-800">
+        <div className="md:hidden divide-y divide-slate-100">
           {filteredDocs.map((doc) => (
             <div key={doc.id} className="p-4 space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2">
                   {getTypeIcon(doc.file_type)}
-                  <span className="font-medium text-white text-sm break-all">
+                  <span className="font-semibold text-slate-900 text-sm break-all">
                     {doc.filename || doc.original_filename}
                   </span>
                 </div>
                 {renderStatusBadge(doc.status)}
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-xs font-mono text-industrial-400 bg-industrial-950 p-2 rounded">
-                <div>Type: <span className="text-industrial-200">{doc.file_type}</span></div>
-                <div>Size: <span className="text-industrial-200">{doc.sizeFormatted || `${doc.file_size} B`}</span></div>
-                <div className="col-span-2 truncate">Path: <span className="text-industrial-300">{doc.storage_path}</span></div>
+              <div className="grid grid-cols-2 gap-2 text-xs font-mono text-slate-600 bg-slate-50 p-2 rounded">
+                <div>Type: <span className="text-slate-900 font-bold">{doc.file_type}</span></div>
+                <div>Size: <span className="text-slate-900 font-bold">{doc.sizeFormatted || `${doc.file_size} B`}</span></div>
+                <div className="col-span-2 truncate">Path: <span className="text-slate-700">{doc.storage_path}</span></div>
               </div>
 
               <div className="flex justify-end gap-2 pt-1">
