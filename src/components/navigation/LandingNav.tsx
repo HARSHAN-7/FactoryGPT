@@ -3,12 +3,14 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X, LogIn } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/components/auth-provider';
 
 export function LandingNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
+  const { isAuthenticated, signOut } = useAuth();
 
   const navLinks = [
     { label: 'Home', href: '/' },
@@ -53,8 +55,24 @@ export function LandingNav() {
           })}
         </nav>
 
-        {/* Action Button */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Action Buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          {isAuthenticated ? (
+            <button
+              onClick={signOut}
+              className="px-4 py-2 rounded-full border border-industrial-700 hover:border-gold-500/50 text-industrial-300 hover:text-white font-mono text-xs transition-all"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link href="/auth/login">
+              <button className="px-4 py-2 rounded-full border border-industrial-700 hover:border-gold-500 text-industrial-200 hover:text-white font-mono text-xs transition-all flex items-center gap-1.5">
+                <LogIn className="w-3.5 h-3.5 text-gold-500" />
+                <span>Log In</span>
+              </button>
+            </Link>
+          )}
+
           <Link href="/chat">
             <button className="px-5 py-2.5 rounded-full bg-gold-600 hover:bg-gold-700 text-industrial-950 font-semibold text-sm transition-all flex items-center gap-1.5 shadow-lg shadow-gold-600/20 hover:shadow-gold-600/30">
               <span>Get Started</span>
@@ -91,7 +109,13 @@ export function LandingNav() {
               </Link>
             ))}
           </div>
-          <div className="pt-4 border-t border-industrial-800">
+          <div className="pt-4 border-t border-industrial-800 flex flex-col gap-2">
+            <Link href="/auth/login" onClick={() => setMobileMenuOpen(false)}>
+              <button className="w-full py-2.5 rounded-full border border-industrial-700 text-white font-mono text-xs flex items-center justify-center gap-1.5">
+                <LogIn className="w-4 h-4 text-gold-500" />
+                <span>Log In / Sign Up</span>
+              </button>
+            </Link>
             <Link href="/chat" onClick={() => setMobileMenuOpen(false)}>
               <button className="w-full py-2.5 rounded-full bg-gold-600 text-industrial-950 font-semibold text-sm flex items-center justify-center gap-1.5">
                 <span>Get Started</span>
