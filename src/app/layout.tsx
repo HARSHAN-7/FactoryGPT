@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { IntroVideoModal } from "@/components/ui/IntroVideoModal";
 
 export const metadata: Metadata = {
   title: "FactoryGPT — AI Intelligence for Smarter Manufacturing",
@@ -40,6 +41,8 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          {/* Intro Video Player on Website Open */}
+          <IntroVideoModal />
           {children}
         </ThemeProvider>
       </body>
