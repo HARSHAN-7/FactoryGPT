@@ -125,7 +125,7 @@ export function VoiceControlModal({
     >
       <div className="space-y-6 text-center py-2">
         {/* Language Selector in Modal */}
-        <div className="flex items-center justify-between p-3 bg-industrial-950 rounded border border-industrial-800 text-xs font-mono">
+        <div className="flex items-center justify-between p-3 bg-industrial-850 rounded border border-industrial-800 text-xs font-mono">
           <div className="flex items-center gap-2 text-industrial-300">
             <Languages className="w-4 h-4 text-accent-orange" />
             <span>Voice Language:</span>
@@ -133,7 +133,7 @@ export function VoiceControlModal({
           <select
             value={selectedLanguage}
             onChange={(e) => onLanguageChange(e.target.value as SupportedLanguage)}
-            className="bg-industrial-900 border border-industrial-700 rounded px-2 py-1 text-white font-mono focus:outline-none focus:border-accent-orange cursor-pointer"
+            className="bg-industrial-900 border border-industrial-700 rounded px-2 py-1 text-industrial-100 font-mono focus:outline-none focus:border-accent-orange cursor-pointer"
           >
             <option value="en">English (en-US)</option>
             <option value="ta">தமிழ் (ta-IN)</option>
@@ -143,8 +143,8 @@ export function VoiceControlModal({
 
         {/* Error Alert */}
         {errorMessage && (
-          <div className="p-3 bg-red-950/80 border border-red-800 rounded text-xs font-mono text-red-300 flex items-start gap-2 text-left">
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+          <div className="p-3 bg-red-50 border border-red-200 rounded text-xs font-mono text-red-700 flex items-start gap-2 text-left">
+            <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
             <div>{errorMessage}</div>
           </div>
         )}
@@ -157,12 +157,12 @@ export function VoiceControlModal({
 
           <button
             onClick={handleToggleListening}
-            className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-200 shadow-xl ${
+            className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg ${
               voiceState === 'listening'
-                ? 'bg-accent-orange text-white shadow-orange-500/40 scale-105'
+                ? 'bg-accent-orange text-white shadow-orange-500/30 scale-105'
                 : voiceState === 'speaking'
                 ? 'bg-emerald-600 text-white shadow-emerald-500/30'
-                : 'bg-industrial-950 border-2 border-industrial-700 text-industrial-300 hover:border-accent-orange hover:text-white'
+                : 'bg-industrial-900 border-2 border-industrial-700 text-industrial-300 hover:border-accent-orange hover:text-industrial-100'
             }`}
             title={voiceState === 'listening' ? 'Click to Stop Listening' : 'Click to Speak'}
           >
@@ -203,12 +203,12 @@ export function VoiceControlModal({
         </div>
 
         {/* Live Transcribed Speech Preview Box */}
-        <div className="p-4 bg-industrial-950 rounded border border-industrial-800 text-left min-h-[70px] space-y-1">
-          <div className="text-[10px] font-mono text-industrial-400 uppercase tracking-wider">
+        <div className="p-4 bg-industrial-850 rounded border border-industrial-800 text-left min-h-[70px] space-y-1">
+          <div className="text-[10px] font-mono text-industrial-500 uppercase tracking-wider">
             Recognized Operator Speech:
           </div>
-          <div className="text-sm font-sans text-white min-h-[30px] italic">
-            {transcriptText ? `"${transcriptText}"` : <span className="text-industrial-600 font-mono text-xs">Waiting for speech input...</span>}
+          <div className="text-sm font-sans text-industrial-100 min-h-[30px] italic">
+            {transcriptText ? `"${transcriptText}"` : <span className="text-industrial-500 font-mono text-xs">Waiting for speech input...</span>}
           </div>
         </div>
 

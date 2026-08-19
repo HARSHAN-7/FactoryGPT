@@ -37,28 +37,28 @@ export function ChatSidebar({
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'Maintenance': return <Wrench className="w-3.5 h-3.5 text-accent-orange" />;
-      case 'Safety': return <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />;
-      case 'Data Analytics': return <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />;
-      default: return <MessageSquare className="w-3.5 h-3.5 text-industrial-400" />;
+      case 'Safety': return <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />;
+      case 'Data Analytics': return <BarChart3 className="w-3.5 h-3.5 text-emerald-600" />;
+      default: return <MessageSquare className="w-3.5 h-3.5 text-industrial-500" />;
     }
   };
 
   const sidebarContent = (
-    <div className="h-full flex flex-col justify-between bg-industrial-950 border-r border-industrial-800 text-industrial-200">
+    <div className="h-full flex flex-col justify-between bg-industrial-900 border-r border-industrial-800 text-industrial-200 shadow-sm">
       {/* Top Header & Brand */}
       <div>
-        <div className="p-4 border-b border-industrial-800 flex items-center justify-between">
+        <div className="p-4 border-b border-industrial-800 flex items-center justify-between bg-industrial-900">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded bg-industrial-900 border border-industrial-700 flex items-center justify-center text-accent-orange group-hover:border-accent-orange">
+            <div className="w-8 h-8 rounded bg-industrial-850 border border-industrial-700 flex items-center justify-center text-accent-orange group-hover:border-accent-orange">
               <Cpu className="w-4 h-4" />
             </div>
             <div>
-              <span className="font-bold text-base text-white tracking-wider font-mono">FACTORY<span className="text-accent-orange">GPT</span></span>
-              <span className="text-[10px] text-industrial-400 block -mt-1 font-mono">Control Assistant</span>
+              <span className="font-bold text-base text-industrial-100 tracking-wider font-mono">FACTORY<span className="text-accent-orange">GPT</span></span>
+              <span className="text-[10px] text-industrial-500 block -mt-1 font-mono">Control Assistant</span>
             </div>
           </Link>
           {onCloseMobile && (
-            <button onClick={onCloseMobile} className="md:hidden text-industrial-400 hover:text-white p-1">
+            <button onClick={onCloseMobile} className="md:hidden text-industrial-500 hover:text-industrial-100 p-1">
               <X className="w-5 h-5" />
             </button>
           )}
@@ -84,13 +84,13 @@ export function ChatSidebar({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             icon={<Search className="w-3.5 h-3.5" />}
-            className="text-xs bg-industrial-900 border-industrial-800"
+            className="text-xs bg-industrial-950 border-industrial-800"
           />
         </div>
 
         {/* Conversation List */}
         <div className="px-3 space-y-1 max-h-[calc(100vh-280px)] overflow-y-auto">
-          <div className="px-2 py-1.5 text-[11px] font-mono uppercase tracking-wider text-industrial-400">
+          <div className="px-2 py-1.5 text-[11px] font-mono uppercase tracking-wider text-industrial-500">
             Recent Factory Queries ({filteredConversations.length})
           </div>
           {filteredConversations.length === 0 ? (
@@ -110,8 +110,8 @@ export function ChatSidebar({
                   className={cn(
                     'w-full text-left px-3 py-2.5 rounded-md flex items-start gap-2.5 text-xs transition-colors group relative',
                     isActive 
-                      ? 'bg-industrial-850 text-white font-medium border border-industrial-700' 
-                      : 'hover:bg-industrial-900 text-industrial-300 hover:text-industrial-100'
+                      ? 'bg-accent-orange/10 text-accent-orange font-medium border border-accent-orange/30' 
+                      : 'hover:bg-industrial-850 text-industrial-300 hover:text-industrial-100'
                   )}
                 >
                   <span className="mt-0.5 shrink-0">
@@ -133,26 +133,26 @@ export function ChatSidebar({
       </div>
 
       {/* Footer Controls & User Profile */}
-      <div className="p-3 border-t border-industrial-800 space-y-2 bg-industrial-950">
+      <div className="p-3 border-t border-industrial-800 space-y-2 bg-industrial-900">
         <Link href="/admin">
-          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-300 hover:text-white" icon={<Database className="w-4 h-4 text-emerald-400" />}>
+          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-400 hover:text-industrial-100" icon={<Database className="w-4 h-4 text-emerald-600" />}>
             Admin Knowledge Base
           </Button>
         </Link>
         <Link href="/settings">
-          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-300 hover:text-white" icon={<Settings className="w-4 h-4" />}>
+          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-400 hover:text-industrial-100" icon={<Settings className="w-4 h-4" />}>
             System Settings
           </Button>
         </Link>
 
         {/* User Card */}
-        <div className="pt-2 border-t border-industrial-850 flex items-center gap-3 px-2 py-1.5 rounded bg-industrial-900/60">
+        <div className="pt-2 border-t border-industrial-800 flex items-center gap-3 px-2 py-1.5 rounded bg-industrial-850">
           <div className="w-7 h-7 rounded-full bg-accent-orange/20 border border-accent-orange/40 flex items-center justify-center text-accent-orange text-xs font-bold font-mono">
             SJ
           </div>
           <div className="flex-1 truncate">
-            <div className="text-xs font-semibold text-white truncate">Eng. Sarah Jenkins</div>
-            <div className="text-[10px] text-industrial-400 truncate font-mono">Lead Operations Officer</div>
+            <div className="text-xs font-semibold text-industrial-100 truncate">Eng. Sarah Jenkins</div>
+            <div className="text-[10px] text-industrial-500 truncate font-mono">Lead Operations Officer</div>
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@ export function ChatSidebar({
       {/* Mobile Drawer */}
       {isMobileOpen && (
         <div className="md:hidden fixed inset-0 z-50 flex">
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" onClick={onCloseMobile} />
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={onCloseMobile} />
           <div className="relative w-80 max-w-[85vw] h-full z-10">
             {sidebarContent}
           </div>

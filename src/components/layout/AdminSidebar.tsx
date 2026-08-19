@@ -23,24 +23,24 @@ export function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-industrial-950 border-r border-industrial-800 text-industrial-200 h-screen sticky top-0 flex flex-col justify-between shrink-0 font-sans">
+    <aside className="w-64 bg-industrial-900 border-r border-industrial-800 text-industrial-200 h-screen sticky top-0 flex flex-col justify-between shrink-0 font-sans shadow-sm">
       <div>
         {/* Brand Header */}
-        <div className="p-4 border-b border-industrial-800 flex items-center justify-between">
+        <div className="p-4 border-b border-industrial-800 flex items-center justify-between bg-industrial-900">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded bg-industrial-900 border border-industrial-700 flex items-center justify-center text-accent-orange group-hover:border-accent-orange">
+            <div className="w-8 h-8 rounded bg-industrial-850 border border-industrial-700 flex items-center justify-center text-accent-orange group-hover:border-accent-orange">
               <Cpu className="w-4 h-4" />
             </div>
             <div>
-              <span className="font-bold text-base text-white tracking-wider font-mono">FACTORY<span className="text-accent-orange">GPT</span></span>
-              <span className="text-[10px] text-industrial-400 block -mt-1 font-mono">Admin Portal</span>
+              <span className="font-bold text-base text-industrial-100 tracking-wider font-mono">FACTORY<span className="text-accent-orange">GPT</span></span>
+              <span className="text-[10px] text-industrial-500 block -mt-1 font-mono">Admin Portal</span>
             </div>
           </Link>
         </div>
 
         {/* Navigation Items */}
         <nav className="p-3 space-y-1">
-          <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-industrial-400">
+          <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-industrial-500">
             Plant Administration
           </div>
           {navItems.map((item) => {
@@ -52,8 +52,8 @@ export function AdminSidebar() {
                 className={cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-md text-xs font-mono transition-colors',
                   isActive
-                    ? 'bg-industrial-850 text-white font-bold border border-industrial-700'
-                    : 'text-industrial-400 hover:bg-industrial-900 hover:text-white'
+                    ? 'bg-accent-orange/10 text-accent-orange font-bold border border-accent-orange/30'
+                    : 'text-industrial-400 hover:bg-industrial-850 hover:text-industrial-100'
                 )}
               >
                 <span className={isActive ? 'text-accent-orange' : ''}>{item.icon}</span>
@@ -65,14 +65,14 @@ export function AdminSidebar() {
       </div>
 
       {/* Footer Controls */}
-      <div className="p-3 border-t border-industrial-800 space-y-2">
+      <div className="p-3 border-t border-industrial-800 space-y-2 bg-industrial-900">
         <Link href="/chat">
           <Button variant="primary" size="sm" className="w-full justify-start font-mono text-xs" icon={<MessageSquare className="w-4 h-4" />}>
             Open Assistant Chat
           </Button>
         </Link>
         <Link href="/">
-          <Button variant="ghost" size="sm" className="w-full justify-start font-mono text-xs text-industrial-400 hover:text-white" icon={<ArrowLeft className="w-4 h-4" />}>
+          <Button variant="ghost" size="sm" className="w-full justify-start font-mono text-xs text-industrial-500 hover:text-industrial-100" icon={<ArrowLeft className="w-4 h-4" />}>
             Return to Landing
           </Button>
         </Link>
