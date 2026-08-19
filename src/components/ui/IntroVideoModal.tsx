@@ -15,6 +15,9 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  // Global Supabase CDN Video Stream URL (24/7 High Speed Availability)
+  const cdnVideoUrl = "https://dlazplaoxvbxevofdxbg.supabase.co/storage/v1/object/public/factory-documents/intro.mp4";
+
   useEffect(() => {
     if (isOpen && videoRef.current) {
       setHasError(false);
@@ -115,18 +118,20 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
           onPlaying={() => setIsLoadingVideo(false)}
           className="w-full h-full object-cover"
         >
-          {/* Stream Source 1: HTTP 206 Range Stream Endpoint */}
+          {/* Source 1: High-Speed Supabase Global CDN Video Stream */}
+          <source src={cdnVideoUrl} type="video/mp4" />
+          {/* Source 2: HTTP Range API Stream */}
           <source src="/api/video" type="video/mp4" />
-          {/* Stream Source 2: Direct Static File Asset */}
+          {/* Source 3: Direct Public Asset */}
           <source src="/intro.mp4" type="video/mp4" />
-          Your browser does not support HTML5 video streaming.
+          Your browser does not support HTML5 video.
         </video>
 
         {/* Loading Spinner Indicator */}
         {isLoadingVideo && !hasError && (
           <div className="absolute inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center text-gold-500 font-mono text-xs gap-2">
             <RefreshCw className="w-6 h-6 animate-spin" />
-            <span>Buffering Intro Video Stream...</span>
+            <span>Streaming FactoryGPT Intro Film...</span>
           </div>
         )}
 
@@ -135,7 +140,7 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center gap-4 z-10">
             <button
               onClick={handlePlayManual}
-              className="w-20 h-20 rounded-full bg-gold-600 text-industrial-950 flex items-center justify-center shadow-2xl shadow-gold-600/50 hover:scale-110 transition-transform"
+              className="w-20 h-20 rounded-full bg-gold-600 text-industrial-950 flex items-center justify-center shadow-2xl shadow-gold-600/50 hover:scale-110 transition-transform cursor-pointer"
             >
               <Play className="w-10 h-10 fill-current ml-1" />
             </button>
@@ -150,8 +155,8 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
           <div className="absolute inset-0 bg-industrial-950 flex flex-col items-center justify-center p-6 text-center space-y-4 z-10 text-xs font-mono text-industrial-300">
             <AlertCircle className="w-10 h-10 text-red-400" />
             <div>
-              <div className="text-white font-bold text-sm">Video Stream Buffering</div>
-              <div className="text-industrial-400 mt-1">Please allow a few seconds for the video stream to load on your connection.</div>
+              <div className="text-white font-bold text-sm">Video Stream Loading</div>
+              <div className="text-industrial-400 mt-1">Video stream is buffering from global CDN. Please allow a few seconds.</div>
             </div>
             <button
               onClick={onClose}
