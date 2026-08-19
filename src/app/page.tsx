@@ -71,55 +71,16 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Right Column: Futuristic 3D Factory Visual & HUD Overlays */}
+          {/* Right Column: High Resolution Smart Factory 3D Render Image */}
           <div className="lg:col-span-7 relative">
-            <div className="relative mx-auto rounded-2xl bg-industrial-900 border border-industrial-800 p-3 sm:p-5 gold-glow overflow-hidden">
-              
-              {/* Graphic Factory Render Representation */}
-              <div className="relative h-[380px] sm:h-[440px] w-full rounded-xl bg-industrial-950 overflow-hidden flex items-center justify-center border border-industrial-800/60">
-                {/* Visual Grid & Isometric Factory Lines */}
-                <div className="absolute inset-0 bg-industrial-grid opacity-30" />
-                
-                {/* 3D Model Schematic Representation */}
-                <div className="relative z-10 text-center space-y-4">
-                  <div className="w-24 h-24 mx-auto rounded-2xl bg-industrial-900 border-2 border-gold-500/40 flex items-center justify-center text-gold-500 shadow-2xl animate-pulse">
-                    <Construction className="w-12 h-12" />
-                  </div>
-                  <div className="text-sm font-mono text-white font-bold tracking-wider">
-                    SMART FACTORY AUTOMATION HUB
-                  </div>
-                  <div className="text-xs font-mono text-gold-500 bg-gold-600/10 px-3 py-1 rounded-full border border-gold-500/20 inline-block">
-                    ● REAL-TIME AI TELEMETRY CONNECTED
-                  </div>
-                </div>
-
-                {/* HUD Overlay Card 1: Production Overview */}
-                <div className="absolute top-4 left-4 p-3 rounded-lg bg-industrial-900/90 border border-industrial-700/80 backdrop-blur-md text-left shadow-lg w-44">
-                  <div className="text-[10px] font-mono text-industrial-400">Production Overview</div>
-                  <div className="text-xl font-bold font-mono text-white mt-1">98.6%</div>
-                  <div className="text-[10px] text-emerald-400 font-mono">Efficiency ↑ 12.5%</div>
-                </div>
-
-                {/* HUD Overlay Card 2: Predictive Maintenance */}
-                <div className="absolute top-6 right-4 p-3 rounded-lg bg-industrial-900/90 border border-industrial-700/80 backdrop-blur-md text-left shadow-lg w-48">
-                  <div className="text-[10px] font-mono text-industrial-400">Predictive Maintenance</div>
-                  <div className="flex items-center justify-between mt-1">
-                    <div>
-                      <div className="text-[10px] text-industrial-400">Risk Level</div>
-                      <div className="text-sm font-bold font-mono text-emerald-400">Low</div>
-                    </div>
-                    <Wrench className="w-5 h-5 text-gold-500" />
-                  </div>
-                </div>
-
-                {/* HUD Overlay Card 3: Energy Consumption */}
-                <div className="absolute bottom-4 right-4 p-3 rounded-lg bg-industrial-900/90 border border-industrial-700/80 backdrop-blur-md text-left shadow-lg w-48">
-                  <div className="text-[10px] font-mono text-industrial-400">Energy Consumption</div>
-                  <div className="text-lg font-bold font-mono text-emerald-400 mt-1">-18.4%</div>
-                  <div className="text-[10px] text-industrial-400 font-mono">vs last month</div>
-                </div>
+            <div className="relative mx-auto rounded-2xl bg-industrial-900 border border-industrial-800 p-2 sm:p-3 gold-glow overflow-hidden shadow-2xl">
+              <div className="relative rounded-xl overflow-hidden border border-industrial-800/80 bg-industrial-950">
+                <img
+                  src="/smart-factory-hero.png"
+                  alt="FactoryGPT Smart Automated 3D Factory"
+                  className="w-full h-auto object-cover rounded-xl shadow-2xl hover:scale-[1.01] transition-transform duration-300"
+                />
               </div>
-
             </div>
           </div>
 
