@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { FastForward, Volume2, VolumeX, Play, AlertCircle } from 'lucide-react';
+import { FastForward, Volume2, VolumeX, Play, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface IntroVideoModalProps {
   isOpen: boolean;
@@ -12,11 +12,13 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
   const [isMuted, setIsMuted] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoadingVideo, setIsLoadingVideo] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     if (isOpen && videoRef.current) {
       setHasError(false);
+      setIsLoadingVideo(true);
       videoRef.current.currentTime = 0;
       videoRef.current.muted = true;
       setIsMuted(true);
@@ -26,10 +28,12 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
         playPromise
           .then(() => {
             setIsPlaying(true);
+            setIsLoadingVideo(false);
           })
           .catch((err) => {
-            console.warn('Autoplay prevented:', err);
+            console.warn('Autoplay prevented by browser:', err);
             setIsPlaying(false);
+            setIsLoadingVideo(false);
           });
       }
     }
@@ -106,15 +110,28 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
           controls
           onEnded={onClose}
           onError={() => setHasError(true)}
-          onPlay={() => setIsPlaying(true)}
+          onPlay={() => { setIsPlaying(true); setIsLoadingVideo(false); }}
+          onWaiting={() => setIsLoadingVideo(true)}
+          onPlaying={() => setIsLoadingVideo(false)}
           className="w-full h-full object-cover"
         >
+          {/* Stream Source 1: HTTP 206 Range Stream Endpoint */}
+          <source src="/api/video" type="video/mp4" />
+          {/* Stream Source 2: Direct Static File Asset */}
           <source src="/intro.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
+          Your browser does not support HTML5 video streaming.
         </video>
 
+        {/* Loading Spinner Indicator */}
+        {isLoadingVideo && !hasError && (
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center text-gold-500 font-mono text-xs gap-2">
+            <RefreshCw className="w-6 h-6 animate-spin" />
+            <span>Buffering Intro Video Stream...</span>
+          </div>
+        )}
+
         {/* Play Overlay if video paused */}
-        {!isPlaying && !hasError && (
+        {!isPlaying && !isLoadingVideo && !hasError && (
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center gap-4 z-10">
             <button
               onClick={handlePlayManual}
@@ -133,8 +150,8 @@ export function IntroVideoModal({ isOpen, onClose }: IntroVideoModalProps) {
           <div className="absolute inset-0 bg-industrial-950 flex flex-col items-center justify-center p-6 text-center space-y-4 z-10 text-xs font-mono text-industrial-300">
             <AlertCircle className="w-10 h-10 text-red-400" />
             <div>
-              <div className="text-white font-bold text-sm">Video Stream Unavailable</div>
-              <div className="text-industrial-400 mt-1">Please ensure /intro.mp4 exists in your Vercel deployment assets.</div>
+              <div className="text-white font-bold text-sm">Video Stream Buffering</div>
+              <div className="text-industrial-400 mt-1">Please allow a few seconds for the video stream to load on your connection.</div>
             </div>
             <button
               onClick={onClose}
