@@ -37,6 +37,9 @@ export async function fetchDocuments(): Promise<FactoryDocument[]> {
   return fallbackDocuments;
 }
 
+/**
+ * Uploads document using Server-Side /api/upload Route (Service Role Admin Key bypasses client permission limits)
+ */
 export async function uploadDocument(file: File): Promise<{ success: boolean; document?: FactoryDocument; error?: string }> {
   // 1. Validate file format, size, empty state
   const validation = validateFactoryDocument(file);
@@ -44,76 +47,32 @@ export async function uploadDocument(file: File): Promise<{ success: boolean; do
     return { success: false, error: validation.error };
   }
 
-  const fileType = validation.fileType || 'PDF';
-  const timestamp = Date.now();
-  const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-  const storagePath = `uploads/${timestamp}_${sanitizedName}`;
-  const docId = `doc-${timestamp}`;
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
 
-  // Read file content for vector ingestion
-  const fileText = await file.text();
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
 
-  if (isSupabaseConfigured && supabase) {
-    try {
-      // 2. Upload file to Supabase Storage bucket 'factory-documents'
-      let { error: storageError } = await supabase.storage
-        .from('factory-documents')
-        .upload(storagePath, file, { cacheControl: '3600', upsert: true });
+    const data = await res.json();
 
-      // Auto-create bucket if missing
-      if (storageError && (storageError.message.includes('Bucket not found') || storageError.message.includes('bucket'))) {
-        try {
-          await supabase.storage.createBucket('factory-documents', { public: false });
-          // Retry upload
-          const retry = await supabase.storage
-            .from('factory-documents')
-            .upload(storagePath, file, { cacheControl: '3600', upsert: true });
-          storageError = retry.error;
-        } catch (e) {
-          console.warn('Auto bucket creation warning:', e);
-        }
-      }
-
-      // 3. Insert record into Supabase PostgreSQL 'documents' table
-      const newRecord = {
-        id: docId,
-        filename: file.name,
-        original_filename: file.name,
-        file_type: fileType,
-        file_size: file.size,
-        storage_path: storagePath,
-        status: 'uploaded' as DocumentStatus,
-        processing_error: storageError ? `Storage Notice: ${storageError.message}` : null,
-      };
-
-      const { data: insertedData, error: dbError } = await supabase
-        .from('documents')
-        .insert(newRecord)
-        .select()
-        .single();
-
-      if (!dbError && insertedData) {
-        // Trigger Ingestion Pipeline (Processing -> Extracting -> Chunking -> Embedding -> Indexed -> Completed)
-        processDocumentIngestion(insertedData.id, file.name, fileType, fileText);
-
-        const createdDoc: FactoryDocument = {
-          ...insertedData,
-          sizeFormatted: formatBytes(file.size),
-          uploaderName: 'Eng. Sarah Jenkins',
-        };
-
-        return { success: true, document: createdDoc };
-      }
-
-      if (storageError && dbError) {
-        return { success: false, error: `Supabase Error: ${storageError.message}. Please create bucket "factory-documents" in Supabase Storage or run schema.sql.` };
-      }
-    } catch (err: any) {
-      console.warn('Supabase upload exception:', err);
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || 'Server upload failed');
     }
+
+    return { success: true, document: data.document };
+  } catch (err: any) {
+    console.warn('Server /api/upload failed, falling back to local ingestion:', err);
   }
 
   // Fallback Upload & Ingestion Execution
+  const docId = `doc-${Date.now()}`;
+  const fileType = validation.fileType || 'PDF';
+  const storagePath = `uploads/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+  const fileText = await file.text();
+
   const mockDoc: FactoryDocument = {
     id: docId,
     filename: file.name,
@@ -131,7 +90,6 @@ export async function uploadDocument(file: File): Promise<{ success: boolean; do
 
   fallbackDocuments = [mockDoc, ...fallbackDocuments];
 
-  // Execute full ingestion pipeline
   processDocumentIngestion(docId, file.name, fileType, fileText, (progress) => {
     fallbackDocuments = fallbackDocuments.map((d) =>
       d.id === docId ? { ...d, status: progress.stage as DocumentStatus } : d
