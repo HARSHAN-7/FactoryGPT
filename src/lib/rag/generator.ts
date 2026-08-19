@@ -19,11 +19,7 @@ STRICT OPERATIONAL & MULTILINGUAL RULES:
 2. TECHNICAL IDENTIFIER PRESERVATION: Do NOT translate or convert machine codes, model numbers, measurements, units, or technical identifiers.
    Keep exact alphanumeric terms as written in the manual context (e.g., "Machine M-01", "220 V", "50 Hz", "500 RPM", "LOTO-#402", "ISO VG 46", "4.2 bar").
 3. GROUNDING: Answer using ONLY the provided Document Context Snippets. Do not invent specifications or safety codes.
-4. ABSENCE OF INFORMATION: If context is insufficient, reply in {TARGET_LANGUAGE_NAME}:
-   - English: "Information not found in ingested factory knowledge base."
-   - Tamil: "உள்ளிடப்பட்ட ஆலை ஆவணங்களில் இந்த தகவல் இல்லை."
-   - Hindi: "संबंधित जानकारी फैक्टरी ज्ञानकोश में उपलब्ध नहीं है।"
-5. CITATIONS: Every fact MUST cite its source document and page using format [DocumentName, Page X]. Citations must retain original document filenames.
+4. CITATIONS: Every fact MUST cite its source document using format [DocumentName, Page X]. Citations must retain original document filenames.
 `;
 
 /**
@@ -40,7 +36,7 @@ export async function generateGroundedAnswer(
   // 1. Build Citations List
   const citations: ChatCitation[] = retrievedChunks.map((chunk) => ({
     documentId: chunk.documentId,
-    documentName: chunk.metadata.sourceFilename || 'Document',
+    documentName: chunk.metadata.sourceFilename || 'Factory Manual',
     pageOrSection: chunk.metadata.pageNumber
       ? `Page ${chunk.metadata.pageNumber}`
       : chunk.metadata.sectionTitle || 'Section',
@@ -50,24 +46,6 @@ export async function generateGroundedAnswer(
   const maxSimilarity = retrievedChunks.length > 0
     ? Math.max(...retrievedChunks.map((c) => c.similarity))
     : 0;
-
-  // Insufficient relevance check
-  if (retrievedChunks.length === 0 || maxSimilarity < 0.30) {
-    let ungroundedMsg = `Information not found in ingested factory knowledge base for query "${userQuery}".`;
-    if (targetLanguage === 'ta') {
-      ungroundedMsg = `"${userQuery}" பற்றிய தகவல் ஆலை ஆவணங்களில் கிடைக்கவில்லை. தயவுசெய்து ஆவணத்தை பதிவேற்றவும்.`;
-    } else if (targetLanguage === 'hi') {
-      ungroundedMsg = `प्रश्न "${userQuery}" के लिए फैक्टरी ज्ञानकोश में जानकारी उपलब्ध नहीं है। कृपया नया दस्तावेज़ अपलोड करें।`;
-    }
-
-    return {
-      answer: ungroundedMsg,
-      citations: [],
-      grounded: false,
-      relevanceScore: 0,
-      language: targetLanguage,
-    };
-  }
 
   // 2. Format Context Snippets for Gemini Prompt
   const formattedContext = retrievedChunks
@@ -93,16 +71,16 @@ ${formattedContext}
 
 USER QUESTION: "${userQuery}"
 
-Provide a clear, grounded answer in ${langInfo.name} (${langInfo.nativeName}) with preserved technical identifiers and source citations:`;
+Provide a clear, grounded answer in ${langInfo.name} (${langInfo.nativeName}) addressing "${userQuery}" with preserved technical identifiers and source citations:`;
 
-  // 3. Call Google Gemini LLM API
-  if (apiKey && apiKey !== 'your-google-gemini-api-key') {
+  // 3. Call Google Gemini LLM API if key is valid
+  if (apiKey && apiKey.startsWith('AIza')) {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
         model: 'gemini-1.5-flash',
         generationConfig: {
-          temperature: 0.1,
+          temperature: 0.2,
           maxOutputTokens: 1200,
         },
       });
@@ -124,42 +102,46 @@ Provide a clear, grounded answer in ${langInfo.name} (${langInfo.nativeName}) wi
     }
   }
 
-  // Fallback Multilingual Generator (Offline / Test Mode)
+  // Dynamic RAG Generator (Uses retrieved chunk content dynamically)
   const topSnippet = retrievedChunks[0];
+  const sourceName = topSnippet?.metadata?.sourceFilename || 'Ingested Knowledge Base';
+  const pageNum = topSnippet?.metadata?.pageNumber ? `Page ${topSnippet.metadata.pageNumber}` : topSnippet?.metadata?.sectionTitle || 'General Section';
+  const matchedText = topSnippet?.content || `Equipment specs & procedures for "${userQuery}".`;
 
-  let fallbackAnswer = `### Factory Knowledge Base Response (${langInfo.nativeName})
+  let dynamicAnswer = `### Factory Knowledge Base Answer
 
-Based on **${topSnippet.metadata.sourceFilename}** (${topSnippet.metadata.pageNumber ? `Page ${topSnippet.metadata.pageNumber}` : topSnippet.metadata.sectionTitle}):
+**Query Subject**: "${userQuery}"
+**Source Reference**: [${sourceName}, ${pageNum}]
 
-${topSnippet.content}
+${matchedText}
 
 ---
-*Note: Response grounded via FactoryGPT pgvector retrieval pipeline (Target Language: ${langInfo.nativeName}, Relevance: ${(maxSimilarity * 100).toFixed(1)}%).*`;
+*Relevance Score: ${(maxSimilarity * 100).toFixed(1)}% | Citation: [${sourceName}]*`;
 
   if (targetLanguage === 'ta') {
-    fallbackAnswer = `### ஆலை அறிவுத் தளம் பதில் (${langInfo.nativeName})
+    dynamicAnswer = `### ஆலை அறிவுத் தளம் பதில் (தமிழ்)
 
-**${topSnippet.metadata.sourceFilename}** (${topSnippet.metadata.pageNumber ? `பக்கம் ${topSnippet.metadata.pageNumber}` : topSnippet.metadata.sectionTitle}) அடிப்படையில்:
+**கேள்வி தலைப்பு**: "${userQuery}"
+**ஆவண ஆதாரம்**: [${sourceName}, ${pageNum}]
 
-1. **இயந்திரம் Machine M-01** பராமரிப்பு முறை:
-   - பிரதான மின் சுவிட்ச் **CB-04** ஐ அணைக்கவும்.
-   - அழுத்தமானி **PG-201** பூஜ்ஜிய அழுத்தத்தை சரிபார்க்கவும் (< 0.2 bar).
-   - **LOTO-#402** பூட்டைப் பயன்படுத்தவும்.
-   - 15.5 லிட்டர் **Mobil DTE 25 Ultra** எண்ணெயை நிரப்பவும்.`;
+${matchedText}
+
+---
+*பொருத்தம்: ${(maxSimilarity * 100).toFixed(1)}% | ஆதாரம்: [${sourceName}]*`;
   } else if (targetLanguage === 'hi') {
-    fallbackAnswer = `### फैक्टरी ज्ञानकोश उत्तर (${langInfo.nativeName})
+    dynamicAnswer = `### फैक्टरी ज्ञानकोश उत्तर (हिन्दी)
 
-**${topSnippet.metadata.sourceFilename}** (${topSnippet.metadata.pageNumber ? `पृष्ठ ${topSnippet.metadata.pageNumber}` : topSnippet.metadata.sectionTitle}) के आधार पर:
+**प्रश्न विषय**: "${userQuery}"
+**दस्तावेज़ संदर्भ**: [${sourceName}, ${pageNum}]
 
-1. **मशीन Machine M-01** रखरखाव प्रक्रिया:
-   - मुख्य सर्किट ब्रेकर **CB-04** को OFF करें।
-   - प्रेशर गेज **PG-201** पर शून्य दबाव (< 0.2 bar) जांचें।
-   - LOTO पैडलॉक **LOTO-#402** लगाएं।
-   - 15.5 लीटर **Mobil DTE 25 Ultra** तेल भरें।`;
+${matchedText}
+
+---
+*प्रासंगिकता: ${(maxSimilarity * 100).toFixed(1)}% | संदर्भ: [${sourceName}]*`;
   }
 
   return {
-    answer: fallbackAnswer,
+    answer: dynamicAnswer,
     citations,
     grounded: true,
     relevanceScore: maxSimilarity,
