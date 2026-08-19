@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, Play } from 'lucide-react';
 import { LandingNav } from '@/components/navigation/LandingNav';
+import { PartnerLogos } from '@/components/ui/PartnerLogos';
 
 export default function LandingPage() {
   return (
@@ -53,18 +54,12 @@ export default function LandingPage() {
               </Link>
             </div>
 
-            {/* Trusted by Industry Leaders Footer */}
+            {/* Trusted by Industry Leaders Footer with Original Vector Logos */}
             <div className="pt-6 border-t border-industrial-800/60 space-y-2">
               <div className="text-[10px] font-mono text-industrial-500 tracking-wider uppercase font-semibold">
                 TRUSTED BY INDUSTRY LEADERS
               </div>
-              <div className="flex flex-wrap items-center gap-6 text-industrial-400 font-mono font-bold text-xs sm:text-sm">
-                <span className="hover:text-white transition-colors">SIEMENS</span>
-                <span className="hover:text-white transition-colors">ABB</span>
-                <span className="hover:text-white transition-colors">TATA</span>
-                <span className="hover:text-white transition-colors">Honeywell</span>
-                <span className="hover:text-white transition-colors">Schneider</span>
-              </div>
+              <PartnerLogos />
             </div>
           </div>
 
