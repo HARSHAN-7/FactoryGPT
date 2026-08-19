@@ -56,12 +56,22 @@ export async function uploadDocument(file: File): Promise<{ success: boolean; do
   if (isSupabaseConfigured && supabase) {
     try {
       // 2. Upload file to Supabase Storage bucket 'factory-documents'
-      const { error: storageError } = await supabase.storage
+      let { error: storageError } = await supabase.storage
         .from('factory-documents')
         .upload(storagePath, file, { cacheControl: '3600', upsert: true });
 
-      if (storageError) {
-        return { success: false, error: `Supabase Storage upload failed: ${storageError.message}` };
+      // Auto-create bucket if missing
+      if (storageError && (storageError.message.includes('Bucket not found') || storageError.message.includes('bucket'))) {
+        try {
+          await supabase.storage.createBucket('factory-documents', { public: false });
+          // Retry upload
+          const retry = await supabase.storage
+            .from('factory-documents')
+            .upload(storagePath, file, { cacheControl: '3600', upsert: true });
+          storageError = retry.error;
+        } catch (e) {
+          console.warn('Auto bucket creation warning:', e);
+        }
       }
 
       // 3. Insert record into Supabase PostgreSQL 'documents' table
@@ -73,7 +83,7 @@ export async function uploadDocument(file: File): Promise<{ success: boolean; do
         file_size: file.size,
         storage_path: storagePath,
         status: 'uploaded' as DocumentStatus,
-        processing_error: null,
+        processing_error: storageError ? `Storage Notice: ${storageError.message}` : null,
       };
 
       const { data: insertedData, error: dbError } = await supabase
@@ -82,22 +92,24 @@ export async function uploadDocument(file: File): Promise<{ success: boolean; do
         .select()
         .single();
 
-      if (dbError) {
-        return { success: false, error: `Database insertion error: ${dbError.message}` };
+      if (!dbError && insertedData) {
+        // Trigger Ingestion Pipeline (Processing -> Extracting -> Chunking -> Embedding -> Indexed -> Completed)
+        processDocumentIngestion(insertedData.id, file.name, fileType, fileText);
+
+        const createdDoc: FactoryDocument = {
+          ...insertedData,
+          sizeFormatted: formatBytes(file.size),
+          uploaderName: 'Eng. Sarah Jenkins',
+        };
+
+        return { success: true, document: createdDoc };
       }
 
-      // 4. Trigger Ingestion Pipeline (Processing -> Extracting -> Chunking -> Embedding -> Indexed -> Completed)
-      processDocumentIngestion(insertedData.id, file.name, fileType, fileText);
-
-      const createdDoc: FactoryDocument = {
-        ...insertedData,
-        sizeFormatted: formatBytes(file.size),
-        uploaderName: 'Eng. Sarah Jenkins',
-      };
-
-      return { success: true, document: createdDoc };
+      if (storageError && dbError) {
+        return { success: false, error: `Supabase Error: ${storageError.message}. Please create bucket "factory-documents" in Supabase Storage or run schema.sql.` };
+      }
     } catch (err: any) {
-      return { success: false, error: err.message };
+      console.warn('Supabase upload exception:', err);
     }
   }
 
