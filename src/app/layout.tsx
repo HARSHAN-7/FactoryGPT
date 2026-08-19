@@ -33,11 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
-      <body className="antialiased bg-industrial-950 text-industrial-100 min-h-screen selection:bg-gold-600 selection:text-white">
+    <html lang="en" suppressHydrationWarning className="light">
+      <body className="antialiased bg-white text-slate-900 min-h-screen selection:bg-amber-500 selection:text-white">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >

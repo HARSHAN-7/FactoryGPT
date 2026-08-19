@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #0b0c0e;
-  --foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #020617;
 }
 
-.dark {
-  --background: #0b0c0e;
-  --foreground: #ffffff;
+.light {
+  --background: #ffffff;
+  --foreground: #020617;
 }
 
 body {
@@ -19,30 +19,30 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom Gold Dark Industrial Scrollbars */
+/* Custom Light Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #14161f;
+  background: #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222634;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: #d97706;
 }
 
-/* Fine Grid Pattern with Gold Accent Highlights */
+/* Fine Grid Pattern on Light Background */
 .bg-grid-pattern {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
   background-size: 36px 36px;
 }
 
@@ -56,7 +56,7 @@ body {
   animation: statusPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Glowing Gold Ring Accent */
+/* Soft Light Card Elevation Shadow */
 .gold-glow {
-  box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.06), 0 0 15px -3px rgba(217, 119, 6, 0.12);
 }

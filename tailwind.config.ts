@@ -13,35 +13,35 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         industrial: {
-          950: "#0b0c0e",
-          900: "#14161f",
-          850: "#1a1d28",
-          800: "#222634",
-          700: "#2d3345",
-          600: "#414961",
-          500: "#64748b",
-          400: "#94a3b8",
-          300: "#cbd5e1",
-          200: "#e2e8f0",
-          100: "#ffffff",
+          950: "#ffffff", // Pure Crisp White
+          900: "#f8fafc", // Very Light Slate
+          850: "#f1f5f9", // Soft Light Gray
+          800: "#e2e8f0", // Light Border Gray
+          700: "#cbd5e1", // Slate Gray Border
+          600: "#94a3b8", // Subtitle Gray
+          500: "#64748b", // Body Text Gray
+          400: "#334155", // Dark Slate Text
+          300: "#1e293b", // Deep Charcoal Text
+          200: "#0f172a", // High Contrast Black
+          100: "#020617", // Pure Black
         },
         gold: {
-          500: "#fbbf24",
-          600: "#f59e0b",
-          700: "#d97706",
-          800: "#b45309",
-          subtle: "rgba(251, 191, 36, 0.12)",
+          500: "#d97706",
+          600: "#d97706",
+          700: "#b45309",
+          800: "#78350f",
+          subtle: "rgba(217, 119, 6, 0.12)",
         },
         accent: {
-          orange: "#f59e0b",
-          "orange-hover": "#d97706",
-          "orange-subtle": "rgba(245, 158, 11, 0.12)",
+          orange: "#d97706",
+          "orange-hover": "#b45309",
+          "orange-subtle": "rgba(217, 119, 6, 0.12)",
         },
         status: {
-          online: "#10b981",
-          processing: "#3b82f6",
-          warning: "#f59e0b",
-          error: "#ef4444",
+          online: "#059669",
+          processing: "#2563eb",
+          warning: "#d97706",
+          error: "#dc2626",
         }
       },
       fontFamily: {
@@ -49,7 +49,7 @@ const config: Config = {
         sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
       },
       backgroundImage: {
-        'industrial-grid': "radial-gradient(circle, rgba(251, 191, 36, 0.05) 1px, transparent 1px)",
+        'industrial-grid': "radial-gradient(circle, rgba(15, 23, 42, 0.04) 1px, transparent 1px)",
       },
     },
   },
