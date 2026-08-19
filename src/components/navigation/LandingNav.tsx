@@ -21,14 +21,14 @@ export function LandingNav() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-lg shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md shadow-sm">
       <div className="max-w-[95%] xl:max-w-[96vw] mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-22 flex items-center justify-between">
         {/* Enlarged Official Logo + FactoryGPT Brand Text */}
         <Link href="/" className="flex items-center gap-3.5 group">
           <img
             src="/logo.png"
             alt="FactoryGPT Official Logo"
-            className="h-12 sm:h-14 md:h-16 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
+            className="h-12 sm:h-14 md:h-16 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform duration-200"
           />
           <span className="font-extrabold text-xl sm:text-2xl md:text-3xl text-slate-900 tracking-tight font-sans">
             Factory<span className="text-amber-600">GPT</span>
@@ -36,7 +36,7 @@ export function LandingNav() {
         </Link>
 
         {/* Center Nav Links with active route highlighting */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
+        <nav className="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -44,7 +44,7 @@ export function LandingNav() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'transition-colors pb-0.5',
+                  'transition-all pb-1 relative',
                   isActive
                     ? 'text-amber-600 font-bold border-b-2 border-amber-600'
                     : 'hover:text-slate-900'
@@ -59,7 +59,7 @@ export function LandingNav() {
         {/* Action Button */}
         <div className="hidden md:flex items-center gap-4">
           <Link href="/chat">
-            <button className="px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm transition-all flex items-center gap-1.5 shadow-md shadow-amber-500/20">
+            <button className="px-6 py-2.5 rounded-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm transition-all flex items-center gap-1.5 shadow-md shadow-amber-500/25 hover:shadow-amber-500/35 hover:-translate-y-0.5">
               <span>Get Started</span>
               <ArrowUpRight className="w-4 h-4" />
             </button>
@@ -69,7 +69,7 @@ export function LandingNav() {
         {/* Mobile menu trigger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-slate-600 hover:text-slate-900"
+          className="md:hidden p-2 text-slate-700 hover:text-slate-900"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -78,15 +78,15 @@ export function LandingNav() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-4">
-          <div className="flex flex-col space-y-3 text-sm font-medium text-slate-700">
+        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-4 shadow-xl">
+          <div className="flex flex-col space-y-3 text-sm font-semibold text-slate-700">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
-                  'py-1 transition-colors',
+                  'py-1.5 transition-colors',
                   pathname === link.href ? 'text-amber-600 font-bold' : 'hover:text-slate-900'
                 )}
               >
@@ -96,7 +96,7 @@ export function LandingNav() {
           </div>
           <div className="pt-4 border-t border-slate-200">
             <Link href="/chat" onClick={() => setMobileMenuOpen(false)}>
-              <button className="w-full py-2.5 rounded-full bg-amber-500 text-slate-950 font-bold text-sm flex items-center justify-center gap-1.5">
+              <button className="w-full py-3 rounded-full bg-amber-500 text-slate-950 font-bold text-sm flex items-center justify-center gap-1.5 shadow-md">
                 <span>Get Started</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>

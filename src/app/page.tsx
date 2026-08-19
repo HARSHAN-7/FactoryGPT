@@ -12,15 +12,15 @@ export default function LandingPage() {
       {/* Header Navigation matching white background */}
       <LandingNav />
 
-      {/* Hero Section matching white background */}
+      {/* Hero Section matching full screen fit */}
       <main className="flex-1 flex items-center px-4 sm:px-6 lg:px-10 max-w-[95%] xl:max-w-[96vw] mx-auto w-full py-6 lg:py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
           
           {/* Left Column: Headline & Call-to-actions */}
           <div className="lg:col-span-5 text-left space-y-6">
             
             {/* Eyebrow Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-amber-500/40 text-[11px] text-amber-700 font-mono shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-amber-500/35 text-[11px] text-amber-700 font-mono shadow-sm">
               <span className="w-2 h-2 rounded-full bg-amber-500 animate-status-pulse" />
               <span>AI FOR SMARTER MANUFACTURING</span>
             </div>
@@ -40,14 +40,14 @@ export default function LandingPage() {
             {/* Action Buttons */}
             <div className="pt-2 flex items-center gap-4">
               <Link href="/chat">
-                <button className="px-8 py-3.5 rounded-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm transition-all flex items-center gap-2 shadow-xl shadow-amber-500/20 hover:shadow-amber-500/30">
+                <button className="px-8 py-3.5 rounded-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm transition-all flex items-center gap-2 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/35 hover:-translate-y-0.5">
                   <span>Start Free Trial</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
               </Link>
 
               <Link href="/chat">
-                <button className="px-8 py-3.5 rounded-full bg-white border border-slate-300 hover:border-amber-500 text-slate-800 font-semibold text-sm transition-all flex items-center gap-2 shadow-sm">
+                <button className="px-8 py-3.5 rounded-full bg-white border border-slate-300 hover:border-amber-500 text-slate-800 font-semibold text-sm transition-all flex items-center gap-2 shadow-sm hover:shadow">
                   <span>Explore Demo</span>
                   <Play className="w-3.5 h-3.5 text-amber-600 fill-current" />
                 </button>
@@ -55,7 +55,7 @@ export default function LandingPage() {
             </div>
 
             {/* Trusted by Industry Leaders Footer */}
-            <div className="pt-6 border-t border-slate-200 space-y-2">
+            <div className="pt-6 border-t border-slate-200/80 space-y-2">
               <div className="text-[10px] font-mono text-slate-500 tracking-wider uppercase font-semibold">
                 TRUSTED BY INDUSTRY LEADERS
               </div>
@@ -65,12 +65,12 @@ export default function LandingPage() {
 
           {/* Right Column: High Resolution Smart Factory 3D Render Image */}
           <div className="lg:col-span-7 relative">
-            <div className="relative mx-auto rounded-2xl bg-white border border-slate-200 p-2 sm:p-3 gold-glow overflow-hidden shadow-xl">
-              <div className="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-900">
+            <div className="relative mx-auto rounded-2xl bg-white border border-slate-200/90 p-2.5 sm:p-3.5 gold-glow overflow-hidden shadow-xl">
+              <div className="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-950">
                 <img
                   src="/smart-factory-hero.png"
                   alt="FactoryGPT Smart Automated 3D Factory"
-                  className="w-full h-auto object-cover rounded-xl shadow-lg"
+                  className="w-full h-auto object-cover rounded-xl shadow-lg hover:scale-[1.008] transition-transform duration-300"
                 />
               </div>
             </div>
