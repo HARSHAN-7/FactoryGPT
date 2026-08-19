@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Construction, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export function LandingNav() {
@@ -11,14 +11,13 @@ export function LandingNav() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-industrial-800/80 bg-industrial-950/85 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo matching template image */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-lg bg-gold-600/10 border border-gold-500/30 flex items-center justify-center text-gold-500 group-hover:scale-105 transition-transform">
-            <Construction className="w-5 h-5" />
-          </div>
-          <span className="font-bold text-xl text-white tracking-tight font-sans">
-            Factory<span className="text-gold-500">GPT</span>
-          </span>
+        {/* Official FactoryGPT Brand Logo */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <img
+            src="/logo.png"
+            alt="FactoryGPT Official Logo"
+            className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
+          />
         </Link>
 
         {/* Center Nav Links matching template image */}

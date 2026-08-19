@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
-  Plus, MessageSquare, Search, Settings, Cpu, User, 
+  Plus, MessageSquare, Search, Settings, User, 
   ChevronRight, Database, LayoutDashboard, X, Wrench, ShieldAlert, BarChart3
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -36,29 +36,27 @@ export function ChatSidebar({
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'Maintenance': return <Wrench className="w-3.5 h-3.5 text-accent-orange" />;
-      case 'Safety': return <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />;
-      case 'Data Analytics': return <BarChart3 className="w-3.5 h-3.5 text-emerald-600" />;
+      case 'Maintenance': return <Wrench className="w-3.5 h-3.5 text-gold-500" />;
+      case 'Safety': return <ShieldAlert className="w-3.5 h-3.5 text-amber-500" />;
+      case 'Data Analytics': return <BarChart3 className="w-3.5 h-3.5 text-emerald-500" />;
       default: return <MessageSquare className="w-3.5 h-3.5 text-industrial-500" />;
     }
   };
 
   const sidebarContent = (
     <div className="h-full flex flex-col justify-between bg-industrial-900 border-r border-industrial-800 text-industrial-200 shadow-sm">
-      {/* Top Header & Brand */}
+      {/* Top Header & Brand with Official Logo */}
       <div>
         <div className="p-4 border-b border-industrial-800 flex items-center justify-between bg-industrial-900">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded bg-industrial-850 border border-industrial-700 flex items-center justify-center text-accent-orange group-hover:border-accent-orange">
-              <Cpu className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="font-bold text-base text-industrial-100 tracking-wider font-mono">FACTORY<span className="text-accent-orange">GPT</span></span>
-              <span className="text-[10px] text-industrial-500 block -mt-1 font-mono">Control Assistant</span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="FactoryGPT Official Logo"
+              className="h-9 w-auto object-contain rounded"
+            />
           </Link>
           {onCloseMobile && (
-            <button onClick={onCloseMobile} className="md:hidden text-industrial-500 hover:text-industrial-100 p-1">
+            <button onClick={onCloseMobile} className="md:hidden text-industrial-500 hover:text-white p-1">
               <X className="w-5 h-5" />
             </button>
           )}
@@ -110,8 +108,8 @@ export function ChatSidebar({
                   className={cn(
                     'w-full text-left px-3 py-2.5 rounded-md flex items-start gap-2.5 text-xs transition-colors group relative',
                     isActive 
-                      ? 'bg-accent-orange/10 text-accent-orange font-medium border border-accent-orange/30' 
-                      : 'hover:bg-industrial-850 text-industrial-300 hover:text-industrial-100'
+                      ? 'bg-gold-600/10 text-gold-500 font-medium border border-gold-500/30' 
+                      : 'hover:bg-industrial-850 text-industrial-300 hover:text-white'
                   )}
                 >
                   <span className="mt-0.5 shrink-0">
@@ -124,7 +122,7 @@ export function ChatSidebar({
                       <span>{conv.updatedAt}</span>
                     </div>
                   </div>
-                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-accent-orange absolute right-2 top-3" />}
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-gold-500 absolute right-2 top-3" />}
                 </button>
               );
             })
@@ -135,23 +133,23 @@ export function ChatSidebar({
       {/* Footer Controls & User Profile */}
       <div className="p-3 border-t border-industrial-800 space-y-2 bg-industrial-900">
         <Link href="/admin">
-          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-400 hover:text-industrial-100" icon={<Database className="w-4 h-4 text-emerald-600" />}>
+          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-400 hover:text-white" icon={<Database className="w-4 h-4 text-emerald-500" />}>
             Admin Knowledge Base
           </Button>
         </Link>
         <Link href="/settings">
-          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-400 hover:text-industrial-100" icon={<Settings className="w-4 h-4" />}>
+          <Button variant="ghost" size="sm" className="w-full justify-start text-xs font-mono text-industrial-400 hover:text-white" icon={<Settings className="w-4 h-4" />}>
             System Settings
           </Button>
         </Link>
 
         {/* User Card */}
         <div className="pt-2 border-t border-industrial-800 flex items-center gap-3 px-2 py-1.5 rounded bg-industrial-850">
-          <div className="w-7 h-7 rounded-full bg-accent-orange/20 border border-accent-orange/40 flex items-center justify-center text-accent-orange text-xs font-bold font-mono">
+          <div className="w-7 h-7 rounded-full bg-gold-600/20 border border-gold-500/40 flex items-center justify-center text-gold-500 text-xs font-bold font-mono">
             SJ
           </div>
           <div className="flex-1 truncate">
-            <div className="text-xs font-semibold text-industrial-100 truncate">Eng. Sarah Jenkins</div>
+            <div className="text-xs font-semibold text-white truncate">Eng. Sarah Jenkins</div>
             <div className="text-[10px] text-industrial-500 truncate font-mono">Lead Operations Officer</div>
           </div>
         </div>
@@ -169,7 +167,7 @@ export function ChatSidebar({
       {/* Mobile Drawer */}
       {isMobileOpen && (
         <div className="md:hidden fixed inset-0 z-50 flex">
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={onCloseMobile} />
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onCloseMobile} />
           <div className="relative w-80 max-w-[85vw] h-full z-10">
             {sidebarContent}
           </div>

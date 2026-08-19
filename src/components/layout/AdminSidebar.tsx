@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, Wrench, FileText, Database, 
-  BarChart3, Settings, Cpu, ArrowLeft, MessageSquare 
+  BarChart3, Settings, ArrowLeft, MessageSquare 
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
@@ -25,16 +25,14 @@ export function AdminSidebar() {
   return (
     <aside className="w-64 bg-industrial-900 border-r border-industrial-800 text-industrial-200 h-screen sticky top-0 flex flex-col justify-between shrink-0 font-sans shadow-sm">
       <div>
-        {/* Brand Header */}
+        {/* Brand Header with Official Logo */}
         <div className="p-4 border-b border-industrial-800 flex items-center justify-between bg-industrial-900">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded bg-industrial-850 border border-industrial-700 flex items-center justify-center text-accent-orange group-hover:border-accent-orange">
-              <Cpu className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="font-bold text-base text-industrial-100 tracking-wider font-mono">FACTORY<span className="text-accent-orange">GPT</span></span>
-              <span className="text-[10px] text-industrial-500 block -mt-1 font-mono">Admin Portal</span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="FactoryGPT Official Logo"
+              className="h-9 w-auto object-contain rounded"
+            />
           </Link>
         </div>
 
@@ -52,11 +50,11 @@ export function AdminSidebar() {
                 className={cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-md text-xs font-mono transition-colors',
                   isActive
-                    ? 'bg-accent-orange/10 text-accent-orange font-bold border border-accent-orange/30'
-                    : 'text-industrial-400 hover:bg-industrial-850 hover:text-industrial-100'
+                    ? 'bg-gold-600/10 text-gold-500 font-bold border border-gold-500/30'
+                    : 'text-industrial-400 hover:bg-industrial-850 hover:text-white'
                 )}
               >
-                <span className={isActive ? 'text-accent-orange' : ''}>{item.icon}</span>
+                <span className={isActive ? 'text-gold-500' : ''}>{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
             );
@@ -72,7 +70,7 @@ export function AdminSidebar() {
           </Button>
         </Link>
         <Link href="/">
-          <Button variant="ghost" size="sm" className="w-full justify-start font-mono text-xs text-industrial-500 hover:text-industrial-100" icon={<ArrowLeft className="w-4 h-4" />}>
+          <Button variant="ghost" size="sm" className="w-full justify-start font-mono text-xs text-industrial-500 hover:text-white" icon={<ArrowLeft className="w-4 h-4" />}>
             Return to Landing
           </Button>
         </Link>
