@@ -1,329 +1,321 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { 
-  Cpu, FileText, Activity, ShieldAlert, Languages, Mic, 
-  Layers, ArrowRight, CheckCircle2, BarChart3, Database, 
-  Search, Lock, Terminal, Wrench, HardHat, Gauge
+  Construction, ArrowUpRight, Play, TrendingUp, Cpu, 
+  CheckCircle2, Activity, ShieldAlert, BarChart3, Database, 
+  Layers, Search, Sliders, Zap, Wrench, RefreshCw, ChevronDown
 } from 'lucide-react';
 import { LandingNav } from '@/components/navigation/LandingNav';
-import { Button } from '@/components/ui/Button';
-import { Card, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-industrial-950 text-industrial-100 flex flex-col font-sans selection:bg-accent-orange selection:text-white bg-grid-pattern">
-      {/* Top Header */}
+    <div className="min-h-screen bg-industrial-950 text-industrial-100 flex flex-col font-sans selection:bg-gold-600 selection:text-white bg-grid-pattern">
+      {/* Header Navigation matching template */}
       <LandingNav />
 
       {/* Hero Section */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full text-center">
-        {/* Status ticker pill */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-industrial-900 border border-industrial-700 text-xs text-industrial-300 mb-8 shadow-inner">
-          <span className="w-2 h-2 rounded-full bg-accent-orange animate-status-pulse" />
-          <span className="font-mono text-[11px]">INDUSTRIAL ENGINE V1.0</span>
-          <span className="text-industrial-600">|</span>
-          <span className="text-industrial-400">Phase 1 Control System</span>
-        </div>
-
-        {/* Hero Title */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
-          AI Intelligence for the <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-orange via-orange-400 to-amber-500 font-mono">Modern Factory</span>
-        </h1>
-
-        {/* Supporting Text */}
-        <p className="mt-6 text-lg sm:text-xl text-industrial-300 max-w-3xl mx-auto font-normal leading-relaxed">
-          Ask questions, understand factory knowledge, analyze operational data, and access machine intelligence through one AI assistant.
-        </p>
-
-        {/* CTAs */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/chat" className="w-full sm:w-auto">
-            <Button variant="primary" size="lg" className="w-full font-semibold shadow-lg shadow-orange-500/10" icon={<ArrowRight className="w-5 h-5" />}>
-              Open FactoryGPT
-            </Button>
-          </Link>
-          <a href="#capabilities" className="w-full sm:w-auto">
-            <Button variant="outline" size="lg" className="w-full">
-              Explore Capabilities
-            </Button>
-          </a>
-        </div>
-
-        {/* Engineering Control Panel Preview Mockup */}
-        <div className="mt-14 max-w-5xl mx-auto rounded-xl border border-industrial-700 bg-industrial-900 shadow-2xl p-2 sm:p-4 relative overflow-hidden">
-          <div className="flex items-center justify-between px-3 py-2 border-b border-industrial-800 bg-industrial-950 rounded-t-lg">
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500/80" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <span className="w-3 h-3 rounded-full bg-green-500/80" />
-              <span className="text-xs font-mono text-industrial-400 ml-2">factorygpt://control-panel/live</span>
-            </div>
-            <Badge variant="indexed" dot>SYSTEM NORMAL</Badge>
-          </div>
-          <div className="p-4 sm:p-6 bg-industrial-950/80 text-left font-mono text-xs text-industrial-300 space-y-3 rounded-b-lg border border-industrial-800/60 mt-1">
-            <div className="flex items-center gap-2 text-accent-orange font-bold">
-              <Terminal className="w-4 h-4" />
-              <span>[FACTORYGPT INTELLIGENCE ENGINE ACTIVE]</span>
-            </div>
-            <div className="text-industrial-400">
-              &gt; Ingesting SOPs: <span className="text-emerald-400">24 Indexed</span> | Hydraulics, Electrics, OSHA Safety
-            </div>
-            <div className="p-3 bg-industrial-900 rounded border border-industrial-800 text-industrial-200">
-              <span className="text-industrial-400 font-sans">User Query:</span> "What is the emergency lockout procedure for Hydraulic Pump HP4000?"
-            </div>
-            <div className="p-3 bg-industrial-900/60 rounded border border-industrial-800/80 text-industrial-300 font-sans leading-relaxed">
-              <span className="text-accent-orange font-mono font-bold block mb-1">FactoryGPT Analysis & Citation:</span>
-              1. Turn main breaker **CB-04** to OFF position.<br/>
-              2. Attach red padlock **LOTO-#809** to breaker door mechanism.<br/>
-              <span className="inline-block mt-2 text-xs font-mono text-emerald-400 border border-emerald-800/60 bg-emerald-950/40 px-2 py-0.5 rounded">
-                Source: Hydraulic_Pump_HP4000_Maintenance_Manual.pdf (Page 45)
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Introduction Section */}
-      <section className="py-16 bg-industrial-900/60 border-y border-industrial-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="text-xs font-mono text-accent-orange uppercase tracking-widest mb-2">Industrial Assistant</div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                Designed for Engineering Rigor & Factory Operations
-              </h2>
-              <p className="mt-4 text-industrial-300 text-base leading-relaxed">
-                Factories operate under tight deadlines, strict compliance regulations, and complex machinery manuals. FactoryGPT bridges the gap between field engineers, plant managers, and massive technical documentation.
-              </p>
-              <ul className="mt-6 space-y-3">
-                {[
-                  'Instant retrieval of machine manuals and operating procedures (SOPs)',
-                  'Data-backed source citations eliminating hallucinated procedures',
-                  'Support for engineering tables, sensor logs, and maintenance CSV datasets',
-                  'Enterprise safety compliance tracking and audit preparation'
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start gap-3 text-sm text-industrial-200">
-                    <CheckCircle2 className="w-5 h-5 text-accent-orange shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+      <section className="relative pt-10 pb-16 md:pt-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: Headline & Call-to-actions */}
+          <div className="lg:col-span-5 text-left space-y-6">
+            
+            {/* Eyebrow Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-industrial-900 border border-gold-500/30 text-xs text-gold-500 font-mono">
+              <span className="w-2 h-2 rounded-full bg-gold-500 animate-status-pulse" />
+              <span>AI FOR SMARTER MANUFACTURING</span>
             </div>
 
-            {/* Metric grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="bg-industrial-900/90">
-                <Gauge className="w-8 h-8 text-accent-orange mb-3" />
-                <div className="text-2xl font-bold font-mono text-white">&lt; 2 Sec</div>
-                <div className="text-xs text-industrial-400 mt-1">Manual Query Response</div>
-              </Card>
-              <Card className="bg-industrial-900/90">
-                <FileText className="w-8 h-8 text-emerald-400 mb-3" />
-                <div className="text-2xl font-bold font-mono text-white">PDF/CSV/XLSX</div>
-                <div className="text-xs text-industrial-400 mt-1">Multi-format Parsing</div>
-              </Card>
-              <Card className="bg-industrial-900/90">
-                <ShieldAlert className="w-8 h-8 text-amber-400 mb-3" />
-                <div className="text-2xl font-bold font-mono text-white">OSHA LOTO</div>
-                <div className="text-xs text-industrial-400 mt-1">Safety Compliant Guidance</div>
-              </Card>
-              <Card className="bg-industrial-900/90">
-                <Languages className="w-8 h-8 text-blue-400 mb-3" />
-                <div className="text-2xl font-bold font-mono text-white">Multilingual</div>
-                <div className="text-xs text-industrial-400 mt-1">Cross-shift Communication</div>
-              </Card>
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Run Your Factory.<br />
+              <span className="text-gold-500 font-extrabold">Smarter with AI.</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg text-industrial-400 font-normal leading-relaxed">
+              FactoryGPT brings the power of AI to your production line. Optimize operations, predict issues, and make data-driven decisions in real-time.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
+              <Link href="/chat" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gold-600 hover:bg-gold-700 text-industrial-950 font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-xl shadow-gold-600/25">
+                  <span>Start Free Trial</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </Link>
+
+              <Link href="/chat" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-industrial-900 border border-industrial-700 hover:border-gold-500/50 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                  <span>Explore Demo</span>
+                  <Play className="w-4 h-4 text-gold-500 fill-current" />
+                </button>
+              </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Core Capabilities */}
-      <section id="capabilities" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="text-xs font-mono text-accent-orange uppercase tracking-widest mb-2">Core Features</div>
-          <h2 className="text-3xl font-bold text-white tracking-tight">Factory Intelligence Capabilities</h2>
-          <p className="text-industrial-300 mt-3 text-base">
-            Turn static factory documents into conversational intelligence with precise engineering context.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card accentBorder>
-            <FileText className="w-7 h-7 text-accent-orange mb-4" />
-            <CardTitle>SOP & Manual Ingestion</CardTitle>
-            <p className="text-sm text-industrial-300 mt-2 leading-relaxed">
-              Upload PDF operating guides, equipment manuals, and electrical schematics. Indexing makes every page searchable.
-            </p>
-          </Card>
-
-          <Card accentBorder>
-            <Search className="w-7 h-7 text-accent-orange mb-4" />
-            <CardTitle>Exact Source Citations</CardTitle>
-            <p className="text-sm text-industrial-300 mt-2 leading-relaxed">
-              Every answer highlights the exact document name, chapter, and page number so operators can verify steps immediately.
-            </p>
-          </Card>
-
-          <Card accentBorder>
-            <BarChart3 className="w-7 h-7 text-accent-orange mb-4" />
-            <CardTitle>Production Data Analysis</CardTitle>
-            <p className="text-sm text-industrial-300 mt-2 leading-relaxed">
-              Analyze CSV and XLSX spreadsheets containing hourly unit counts, breakdown logs, and component wear stats.
-            </p>
-          </Card>
-
-          <Card accentBorder>
-            <ShieldAlert className="w-7 h-7 text-accent-orange mb-4" />
-            <CardTitle>Safety & EHS Guidelines</CardTitle>
-            <p className="text-sm text-industrial-300 mt-2 leading-relaxed">
-              Instant retrieval of Lockout/Tagout (LOTO) requirements, hazardous material sheets (MSDS), and emergency steps.
-            </p>
-          </Card>
-
-          <Card accentBorder>
-            <Languages className="w-7 h-7 text-accent-orange mb-4" />
-            <CardTitle>Multilingual Workforce</CardTitle>
-            <p className="text-sm text-industrial-300 mt-2 leading-relaxed">
-              Query English manuals and receive explanations in Spanish, German, Japanese, or regional languages.
-            </p>
-          </Card>
-
-          <Card accentBorder>
-            <Mic className="w-7 h-7 text-accent-orange mb-4" />
-            <CardTitle>Hands-free Voice AI (Phase 3)</CardTitle>
-            <p className="text-sm text-industrial-300 mt-2 leading-relaxed">
-              Voice command interface allowing line technicians wearing gloves to query manuals without typing.
-            </p>
-          </Card>
-        </div>
-      </section>
-
-      {/* How it Works */}
-      <section id="how-it-works" className="py-20 bg-industrial-900/40 border-t border-industrial-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-xs font-mono text-accent-orange uppercase tracking-widest mb-2">Workflow</div>
-            <h2 className="text-3xl font-bold text-white tracking-tight">How FactoryGPT Works</h2>
-            <p className="text-industrial-300 mt-3 text-base">
-              A 4-step pipeline designed for speed, safety, and privacy in manufacturing environments.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {[
-              { step: '01', title: 'Upload & Parsing', desc: 'Drag and drop PDFs, DOCX, and CSV maintenance logs into the Admin Portal.' },
-              { step: '02', title: 'Vector Indexing', desc: 'Text is chunked and embedded into Supabase pgvector database for semantic search.' },
-              { step: '03', title: 'Context Retrieval', desc: 'When an operator asks a question, relevant manual sections are fetched instantly.' },
-              { step: '04', title: 'Grounded Answer', desc: 'Gemini LLM synthesizes a precise response backed by step-by-step citations.' },
-            ].map((item, idx) => (
-              <div key={idx} className="bg-industrial-900 border border-industrial-800 p-6 rounded-lg relative">
-                <div className="text-3xl font-bold font-mono text-industrial-600 mb-3">{item.step}</div>
-                <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-xs text-industrial-300 leading-relaxed">{item.desc}</p>
+            {/* Trusted by Industry Leaders */}
+            <div className="pt-8 border-t border-industrial-800/80 space-y-3">
+              <div className="text-[11px] font-mono text-industrial-500 tracking-wider uppercase font-semibold">
+                TRUSTED BY INDUSTRY LEADERS
               </div>
-            ))}
+              <div className="flex flex-wrap items-center gap-6 text-industrial-400 font-mono font-bold text-sm">
+                <span className="hover:text-white transition-colors">SIEMENS</span>
+                <span className="hover:text-white transition-colors">ABB</span>
+                <span className="hover:text-white transition-colors">TATA</span>
+                <span className="hover:text-white transition-colors">Honeywell</span>
+                <span className="hover:text-white transition-colors">Schneider</span>
+              </div>
+            </div>
           </div>
+
+          {/* Right Column: Futuristic 3D Factory Visual & HUD Overlays */}
+          <div className="lg:col-span-7 relative">
+            <div className="relative mx-auto rounded-2xl bg-industrial-900 border border-industrial-800 p-3 sm:p-5 gold-glow overflow-hidden">
+              
+              {/* Graphic Factory Render Representation */}
+              <div className="relative h-[380px] sm:h-[440px] w-full rounded-xl bg-industrial-950 overflow-hidden flex items-center justify-center border border-industrial-800/60">
+                {/* Visual Grid & Isometric Factory Lines */}
+                <div className="absolute inset-0 bg-industrial-grid opacity-30" />
+                
+                {/* 3D Model Schematic Representation */}
+                <div className="relative z-10 text-center space-y-4">
+                  <div className="w-24 h-24 mx-auto rounded-2xl bg-industrial-900 border-2 border-gold-500/40 flex items-center justify-center text-gold-500 shadow-2xl animate-pulse">
+                    <Construction className="w-12 h-12" />
+                  </div>
+                  <div className="text-sm font-mono text-white font-bold tracking-wider">
+                    SMART FACTORY AUTOMATION HUB
+                  </div>
+                  <div className="text-xs font-mono text-gold-500 bg-gold-600/10 px-3 py-1 rounded-full border border-gold-500/20 inline-block">
+                    ● REAL-TIME AI TELEMETRY CONNECTED
+                  </div>
+                </div>
+
+                {/* HUD Overlay Card 1: Production Overview */}
+                <div className="absolute top-4 left-4 p-3 rounded-lg bg-industrial-900/90 border border-industrial-700/80 backdrop-blur-md text-left shadow-lg w-44">
+                  <div className="text-[10px] font-mono text-industrial-400">Production Overview</div>
+                  <div className="text-xl font-bold font-mono text-white mt-1">98.6%</div>
+                  <div className="text-[10px] text-emerald-400 font-mono">Efficiency ↑ 12.5%</div>
+                </div>
+
+                {/* HUD Overlay Card 2: Predictive Maintenance */}
+                <div className="absolute top-6 right-4 p-3 rounded-lg bg-industrial-900/90 border border-industrial-700/80 backdrop-blur-md text-left shadow-lg w-48">
+                  <div className="text-[10px] font-mono text-industrial-400">Predictive Maintenance</div>
+                  <div className="flex items-center justify-between mt-1">
+                    <div>
+                      <div className="text-[10px] text-industrial-400">Risk Level</div>
+                      <div className="text-sm font-bold font-mono text-emerald-400">Low</div>
+                    </div>
+                    <Wrench className="w-5 h-5 text-gold-500" />
+                  </div>
+                </div>
+
+                {/* HUD Overlay Card 3: Energy Consumption */}
+                <div className="absolute bottom-4 right-4 p-3 rounded-lg bg-industrial-900/90 border border-industrial-700/80 backdrop-blur-md text-left shadow-lg w-48">
+                  <div className="text-[10px] font-mono text-industrial-400">Energy Consumption</div>
+                  <div className="text-lg font-bold font-mono text-emerald-400 mt-1">-18.4%</div>
+                  <div className="text-[10px] text-industrial-400 font-mono">vs last month</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* Industrial Use Cases */}
-      <section id="use-cases" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="text-xs font-mono text-accent-orange uppercase tracking-widest mb-2">Applications</div>
-          <h2 className="text-3xl font-bold text-white tracking-tight">Built for Every Role on the Plant Floor</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6 rounded-lg bg-industrial-900 border border-industrial-800">
-            <Wrench className="w-8 h-8 text-accent-orange mb-4" />
-            <h3 className="text-lg font-semibold text-white mb-2">Maintenance Engineers</h3>
-            <p className="text-sm text-industrial-300 leading-relaxed">
-              Quickly troubleshoot error codes (e.g. "Error E-402 on CNC Machine") without flipping through 300-page paper binders.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-lg bg-industrial-900 border border-industrial-800">
-            <HardHat className="w-8 h-8 text-amber-400 mb-4" />
-            <h3 className="text-lg font-semibold text-white mb-2">Safety & EHS Officers</h3>
-            <p className="text-sm text-industrial-300 leading-relaxed">
-              Ensure shift workers adhere to up-to-date compliance procedures, chemical handling protocols, and protective gear requirements.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-lg bg-industrial-900 border border-industrial-800">
-            <BarChart3 className="w-8 h-8 text-emerald-400 mb-4" />
-            <h3 className="text-lg font-semibold text-white mb-2">Plant Managers</h3>
-            <p className="text-sm text-industrial-300 leading-relaxed">
-              Query daily production logs to detect recurring bottleneck machines, track shift efficiency, and optimize maintenance schedules.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Technology Section */}
-      <section id="technology" className="py-16 bg-industrial-900/60 border-y border-industrial-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="text-xs font-mono text-accent-orange uppercase tracking-widest mb-2">Architecture</div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">Engineering Tech Stack</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div className="p-4 bg-industrial-950 border border-industrial-800 rounded">
-              <div className="font-mono text-accent-orange font-bold">Next.js 14</div>
-              <div className="text-xs text-industrial-400 mt-1">App Router & Server Actions</div>
+      {/* Feature Highlights Bar (Middle Strip matching template image) */}
+      <section className="border-y border-industrial-800 bg-industrial-900/60 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <div className="p-4 rounded-xl bg-industrial-900 border border-industrial-800 flex items-start gap-4 hover:border-gold-500/40 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-gold-600/10 border border-gold-500/30 flex items-center justify-center text-gold-500 shrink-0">
+              <BarChart3 className="w-5 h-5" />
             </div>
-            <div className="p-4 bg-industrial-950 border border-industrial-800 rounded">
-              <div className="font-mono text-emerald-400 font-bold">Supabase pgvector</div>
-              <div className="text-xs text-industrial-400 mt-1">PostgreSQL Vector DB</div>
-            </div>
-            <div className="p-4 bg-industrial-950 border border-industrial-800 rounded">
-              <div className="font-mono text-blue-400 font-bold">Google Gemini API</div>
-              <div className="text-xs text-industrial-400 mt-1">Multimodal LLM Reasoning</div>
-            </div>
-            <div className="p-4 bg-industrial-950 border border-industrial-800 rounded">
-              <div className="font-mono text-amber-400 font-bold">TypeScript Strict</div>
-              <div className="text-xs text-industrial-400 mt-1">Production Type Safety</div>
+            <div>
+              <div className="font-semibold text-white text-sm">Real-time Analytics</div>
+              <div className="text-xs text-industrial-400 mt-1">Monitor every machine and process in real-time.</div>
             </div>
           </div>
+
+          <div className="p-4 rounded-xl bg-industrial-900 border border-industrial-800 flex items-start gap-4 hover:border-gold-500/40 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-gold-600/10 border border-gold-500/30 flex items-center justify-center text-gold-500 shrink-0">
+              <Activity className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-semibold text-white text-sm">Predictive Maintenance</div>
+              <div className="text-xs text-industrial-400 mt-1">AI predicts failures before they happen.</div>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-industrial-900 border border-industrial-800 flex items-start gap-4 hover:border-gold-500/40 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-gold-600/10 border border-gold-500/30 flex items-center justify-center text-gold-500 shrink-0">
+              <Zap className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-semibold text-white text-sm">Process Optimization</div>
+              <div className="text-xs text-industrial-400 mt-1">Optimize workflows and increase productivity.</div>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-industrial-900 border border-industrial-800 flex items-start gap-4 hover:border-gold-500/40 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-gold-600/10 border border-gold-500/30 flex items-center justify-center text-gold-500 shrink-0">
+              <Database className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-semibold text-white text-sm">Seamless Integration</div>
+              <div className="text-xs text-industrial-400 mt-1">Works with your existing systems and sensors.</div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
-        <div className="p-10 rounded-2xl bg-gradient-to-b from-industrial-900 to-industrial-950 border border-industrial-700 shadow-2xl relative overflow-hidden">
-          <h2 className="text-3xl font-bold text-white tracking-tight">Ready to test FactoryGPT Phase 1?</h2>
-          <p className="mt-3 text-industrial-300 max-w-xl mx-auto text-sm">
-            Access the chat assistant interface or manage machine manuals through the admin dashboard.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/chat">
-              <Button variant="primary" size="lg" icon={<ArrowRight className="w-5 h-5" />}>
-                Launch Chat Interface
-              </Button>
-            </Link>
-            <Link href="/admin">
-              <Button variant="outline" size="lg" icon={<Database className="w-5 h-5" />}>
-                Open Admin Portal
-              </Button>
-            </Link>
+      {/* Section 2: Powerful Insights & Real-Time Dashboard Preview matching template image */}
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12">
+        
+        {/* Section Header */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-6 space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-gold-500">
+              <span>⦿ POWERFUL INSIGHTS</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Data. AI. Results.
+            </h2>
+            <p className="text-base text-industrial-400">
+              FactoryGPT turns your factory data into actionable insights that drive real results.
+            </p>
+          </div>
+
+          {/* 4 Key Stat Counters matching template */}
+          <div className="lg:col-span-6 grid grid-cols-4 gap-4 text-center">
+            <div className="p-3 rounded-lg bg-industrial-900 border border-industrial-800">
+              <div className="text-2xl sm:text-3xl font-extrabold font-mono text-gold-500">+32%</div>
+              <div className="text-[11px] text-industrial-400 mt-1">Productivity</div>
+            </div>
+            <div className="p-3 rounded-lg bg-industrial-900 border border-industrial-800">
+              <div className="text-2xl sm:text-3xl font-extrabold font-mono text-gold-500">-24%</div>
+              <div className="text-[11px] text-industrial-400 mt-1">Downtime</div>
+            </div>
+            <div className="p-3 rounded-lg bg-industrial-900 border border-industrial-800">
+              <div className="text-2xl sm:text-3xl font-extrabold font-mono text-gold-500">+18%</div>
+              <div className="text-[11px] text-industrial-400 mt-1">Quality</div>
+            </div>
+            <div className="p-3 rounded-lg bg-industrial-900 border border-industrial-800">
+              <div className="text-2xl sm:text-3xl font-extrabold font-mono text-gold-500">-21%</div>
+              <div className="text-[11px] text-industrial-400 mt-1">Energy Cost</div>
+            </div>
           </div>
         </div>
+
+        {/* Real-time Dashboard Interface Preview Mockup matching template image */}
+        <div className="rounded-2xl border border-industrial-800 bg-industrial-900 p-4 sm:p-6 shadow-2xl space-y-6">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            {/* Mock Dashboard Sidebar */}
+            <div className="lg:col-span-3 bg-industrial-950 p-4 rounded-xl border border-industrial-800 space-y-2 text-xs font-mono">
+              <div className="flex items-center gap-2 pb-3 mb-2 border-b border-industrial-800 text-white font-bold">
+                <Construction className="w-4 h-4 text-gold-500" />
+                <span>FactoryGPT</span>
+              </div>
+              <div className="px-3 py-2 rounded-lg bg-gold-600/15 border border-gold-500/40 text-gold-500 font-bold flex items-center gap-2">
+                <span>Overview</span>
+              </div>
+              <div className="px-3 py-2 text-industrial-400 hover:text-white cursor-pointer">Production</div>
+              <div className="px-3 py-2 text-industrial-400 hover:text-white cursor-pointer">Machines</div>
+              <div className="px-3 py-2 text-industrial-400 hover:text-white cursor-pointer">Analytics</div>
+              <div className="px-3 py-2 text-industrial-400 hover:text-white cursor-pointer">Alerts</div>
+              <div className="px-3 py-2 text-industrial-400 hover:text-white cursor-pointer">Reports</div>
+              <div className="px-3 py-2 text-industrial-400 hover:text-white cursor-pointer">Settings</div>
+            </div>
+
+            {/* Mock Main Metrics Grid */}
+            <div className="lg:col-span-9 space-y-6">
+              
+              {/* 4 Summary Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="p-4 rounded-xl bg-industrial-950 border border-industrial-800 space-y-1 text-left">
+                  <div className="text-[10px] font-mono text-industrial-400">Production Efficiency</div>
+                  <div className="text-2xl font-bold font-mono text-white">98.6%</div>
+                  <div className="text-[10px] text-emerald-400 font-mono">↑ 12.5%</div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-industrial-950 border border-industrial-800 space-y-1 text-left">
+                  <div className="text-[10px] font-mono text-industrial-400">Total Output</div>
+                  <div className="text-2xl font-bold font-mono text-white">24.5K</div>
+                  <div className="text-[10px] text-emerald-400 font-mono">↑ 8.4%</div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-industrial-950 border border-industrial-800 space-y-1 text-left">
+                  <div className="text-[10px] font-mono text-industrial-400">Active Machines</div>
+                  <div className="text-2xl font-bold font-mono text-white">128</div>
+                  <div className="text-[10px] text-emerald-400 font-mono">↑ 3.7%</div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-industrial-950 border border-industrial-800 space-y-1 text-left">
+                  <div className="text-[10px] font-mono text-industrial-400">Alerts</div>
+                  <div className="text-2xl font-bold font-mono text-white">3</div>
+                  <div className="text-[10px] text-red-400 font-mono">↓ 25%</div>
+                </div>
+              </div>
+
+              {/* Charts Row */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                {/* Production Trend Line Chart */}
+                <div className="md:col-span-2 p-4 rounded-xl bg-industrial-950 border border-industrial-800 space-y-4">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-white font-bold">Production Trend</span>
+                    <span className="text-industrial-400 flex items-center gap-1 border border-industrial-700 px-2 py-0.5 rounded">This Week <ChevronDown className="w-3 h-3" /></span>
+                  </div>
+                  {/* SVG Wave Sparkline Chart */}
+                  <div className="h-36 w-full flex items-end">
+                    <svg className="w-full h-full text-gold-500" viewBox="0 0 400 100" fill="none">
+                      <path d="M0 80 Q 50 20, 100 60 T 200 40 T 300 70 T 400 20" stroke="currentColor" strokeWidth="3" fill="none" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Machine Status Donut Chart */}
+                <div className="p-4 rounded-xl bg-industrial-950 border border-industrial-800 space-y-4">
+                  <div className="text-xs font-mono text-white font-bold text-left">Machine Status</div>
+                  <div className="flex items-center justify-center relative py-2">
+                    <div className="w-24 h-24 rounded-full border-8 border-gold-500 flex items-center justify-center text-center">
+                      <div>
+                        <div className="text-lg font-bold font-mono text-white">128</div>
+                        <div className="text-[9px] text-industrial-400">Total</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-1 text-[11px] font-mono text-industrial-400 text-left">
+                    <div className="flex justify-between"><span>● Running</span><span className="text-white">90</span></div>
+                    <div className="flex justify-between"><span>● Idle</span><span className="text-white">21</span></div>
+                    <div className="flex justify-between"><span>● Maintenance</span><span className="text-white">12</span></div>
+                    <div className="flex justify-between"><span>● Offline</span><span className="text-white">5</span></div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </section>
 
       {/* Footer */}
-      <footer className="mt-auto border-t border-industrial-800 bg-industrial-950 py-8 text-xs text-industrial-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Cpu className="w-4 h-4 text-accent-orange" />
-            <span className="font-mono text-white font-bold">FACTORYGPT</span>
-            <span>— Final Year Engineering Project (Phase 1)</span>
-          </div>
+      <footer className="border-t border-industrial-800 bg-industrial-950 py-8 px-4 text-center text-xs font-mono text-industrial-500">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>© 2026 FactoryGPT Industrial AI Platform. All Rights Reserved.</div>
           <div className="flex items-center gap-6">
-            <Link href="/chat" className="hover:text-white">Chat</Link>
-            <Link href="/admin" className="hover:text-white">Admin</Link>
-            <Link href="/settings" className="hover:text-white">Settings</Link>
+            <Link href="/chat" className="hover:text-gold-500">Open Assistant</Link>
+            <Link href="/admin" className="hover:text-gold-500">Admin Portal</Link>
           </div>
         </div>
       </footer>

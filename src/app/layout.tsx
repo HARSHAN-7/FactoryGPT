@@ -3,13 +3,13 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "FactoryGPT — AI Intelligence for the Modern Factory",
-  description: "AI assistant for manufacturing environments, equipment manuals, SOPs, and operational telemetry data.",
-  keywords: ["FactoryGPT", "Industrial AI", "Manufacturing Assistant", "RAG", "Supabase pgvector", "Google Gemini", "SOP Search"],
+  title: "FactoryGPT — AI Intelligence for Smarter Manufacturing",
+  description: "Run your factory smarter with AI. FactoryGPT brings the power of AI to your production line. Optimize operations, predict issues, and make data-driven decisions in real-time.",
+  keywords: ["FactoryGPT", "Smart Manufacturing", "Industrial AI", "Predictive Maintenance", "Supabase pgvector", "Google Gemini"],
   authors: [{ name: "FactoryGPT Engineering Team" }],
   openGraph: {
-    title: "FactoryGPT — AI Intelligence for the Modern Factory",
-    description: "Ask questions, understand factory knowledge, analyze operational data, and access machine intelligence.",
+    title: "FactoryGPT — AI Intelligence for Smarter Manufacturing",
+    description: "Run your factory smarter with AI. Optimize operations, predict issues, and make data-driven decisions in real-time.",
     url: "https://factorygpt.vercel.app",
     siteName: "FactoryGPT",
     locale: "en_US",
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FactoryGPT — AI Intelligence for the Modern Factory",
-    description: "Industrial AI assistant powered by Next.js, Supabase pgvector, and Google Gemini.",
+    title: "FactoryGPT — AI Intelligence for Smarter Manufacturing",
+    description: "Industrial AI platform powered by Next.js, Supabase pgvector, and Google Gemini.",
   },
   robots: {
     index: true,
@@ -32,11 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="light">
-      <body className="antialiased bg-industrial-950 text-industrial-100 min-h-screen selection:bg-accent-orange selection:text-white">
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className="antialiased bg-industrial-950 text-industrial-100 min-h-screen selection:bg-gold-600 selection:text-white">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
