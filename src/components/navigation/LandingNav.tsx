@@ -22,7 +22,7 @@ export function LandingNav() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-industrial-800/80 bg-industrial-950/85 backdrop-blur-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-[95%] xl:max-w-[96vw] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Official FactoryGPT Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <img
