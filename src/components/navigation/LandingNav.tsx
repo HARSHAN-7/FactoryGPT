@@ -22,14 +22,17 @@ export function LandingNav() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-industrial-800/80 bg-industrial-950/85 backdrop-blur-lg">
-      <div className="max-w-[95%] xl:max-w-[96vw] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Official FactoryGPT Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+      <div className="max-w-[95%] xl:max-w-[96vw] mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
+        {/* Enlarged Official Logo + FactoryGPT Brand Text */}
+        <Link href="/" className="flex items-center gap-3.5 group">
           <img
             src="/logo.png"
             alt="FactoryGPT Official Logo"
-            className="h-10 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
+            className="h-12 sm:h-14 md:h-16 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform"
           />
+          <span className="font-extrabold text-xl sm:text-2xl md:text-3xl text-white tracking-tight font-sans">
+            Factory<span className="text-gold-500">GPT</span>
+          </span>
         </Link>
 
         {/* Center Nav Links with active route highlighting */}
