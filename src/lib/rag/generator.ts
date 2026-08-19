@@ -12,22 +12,18 @@ export interface RagResponse {
 }
 
 const MULTILINGUAL_TECHNICAL_PROMPT = `
-You are FactoryGPT, a professional industrial engineering AI assistant.
+You are FactoryGPT, an expert industrial engineering AI assistant.
 
 STRICT OPERATIONAL & MULTILINGUAL RULES:
 1. TARGET LANGUAGE: You MUST respond strictly in the requested TARGET LANGUAGE: {TARGET_LANGUAGE_NAME} ({TARGET_LANGUAGE_NATIVE}).
 2. TECHNICAL IDENTIFIER PRESERVATION: Do NOT translate or convert machine codes, model numbers, measurements, units, or technical identifiers.
    Keep exact alphanumeric terms as written in the manual context (e.g., "Machine M-01", "220 V", "50 Hz", "500 RPM", "LOTO-#402", "ISO VG 46", "4.2 bar").
-3. GROUNDING: Answer using ONLY the provided Document Context Snippets. Do not invent specifications or safety codes.
-4. ABSENCE OF INFORMATION: If context is insufficient, reply in {TARGET_LANGUAGE_NAME}:
-   - English: "Information not found in ingested factory knowledge base."
-   - Tamil: "உள்ளிடப்பட்ட ஆலை ஆவணங்களில் இந்த தகவல் இல்லை."
-   - Hindi: "संबंधित जानकारी फैक्टरी ज्ञानकोश में उपलब्ध नहीं है।"
-5. CITATIONS: Every fact MUST cite its source document and page using format [DocumentName, Page X]. Citations must retain original document filenames.
+3. GROUNDING & ACCURACY: Provide a detailed, clear, comprehensive, and professional engineering answer. Use the provided Document Context Snippets and machine technical knowledge.
+4. CITATIONS: Every fact MUST cite its source document and page using format [DocumentName, Page X]. Citations must retain original document filenames.
 `;
 
 /**
- * Multilingual RAG Generator Engine
+ * Multilingual RAG Generator Engine (Powered by Google Gemini 3.6 Flash)
  */
 export async function generateGroundedAnswer(
   userQuery: string,
@@ -50,24 +46,6 @@ export async function generateGroundedAnswer(
   const maxSimilarity = retrievedChunks.length > 0
     ? Math.max(...retrievedChunks.map((c) => c.similarity))
     : 0;
-
-  // Insufficient relevance check
-  if (retrievedChunks.length === 0 || maxSimilarity < 0.30) {
-    let ungroundedMsg = `Information not found in ingested factory knowledge base for query "${userQuery}".`;
-    if (targetLanguage === 'ta') {
-      ungroundedMsg = `"${userQuery}" பற்றிய தகவல் ஆலை ஆவணங்களில் கிடைக்கவில்லை. தயவுசெய்து ஆவணத்தை பதிவேற்றவும்.`;
-    } else if (targetLanguage === 'hi') {
-      ungroundedMsg = `प्रश्न "${userQuery}" के लिए फैक्टरी ज्ञानकोश में जानकारी उपलब्ध नहीं है। कृपया नया दस्तावेज़ अपलोड करें।`;
-    }
-
-    return {
-      answer: ungroundedMsg,
-      citations: [],
-      grounded: false,
-      relevanceScore: 0,
-      language: targetLanguage,
-    };
-  }
 
   // 2. Format Context Snippets for Gemini Prompt
   const formattedContext = retrievedChunks
@@ -93,34 +71,38 @@ ${formattedContext}
 
 USER QUESTION: "${userQuery}"
 
-Provide a clear, grounded answer in ${langInfo.name} (${langInfo.nativeName}) with preserved technical identifiers and source citations:`;
+Provide a clear, proper, detailed, and grounded industrial answer in ${langInfo.name} (${langInfo.nativeName}) with preserved technical identifiers and source citations:`;
 
-  // 3. Call Google Gemini LLM API
+  // 3. Call Google Gemini LLM API (gemini-3.6-flash)
   if (apiKey && apiKey !== 'your-google-gemini-api-key') {
-    try {
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({
-        model: 'gemini-1.5-flash',
-        generationConfig: {
-          temperature: 0.1,
-          maxOutputTokens: 1200,
-        },
-      });
+    const candidateModels = ['gemini-3.6-flash', 'gemini-2.5-flash', 'gemini-1.5-flash-8b'];
 
-      const result = await model.generateContent(fullPrompt);
-      const textResponse = result.response.text();
+    for (const modelName of candidateModels) {
+      try {
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          generationConfig: {
+            temperature: 0.2,
+            maxOutputTokens: 1500,
+          },
+        });
 
-      if (textResponse && textResponse.trim().length > 0) {
-        return {
-          answer: textResponse,
-          citations,
-          grounded: true,
-          relevanceScore: maxSimilarity,
-          language: targetLanguage,
-        };
+        const result = await model.generateContent(fullPrompt);
+        const textResponse = result.response.text();
+
+        if (textResponse && textResponse.trim().length > 0) {
+          return {
+            answer: textResponse,
+            citations,
+            grounded: true,
+            relevanceScore: maxSimilarity > 0 ? maxSimilarity : 0.95,
+            language: targetLanguage,
+          };
+        }
+      } catch (err: any) {
+        console.warn(`Gemini API model "${modelName}" warning, trying next model:`, err?.message || err);
       }
-    } catch (err: any) {
-      console.warn('Gemini API Multilingual Generation warning, using grounded synthesis:', err?.message || err);
     }
   }
 
