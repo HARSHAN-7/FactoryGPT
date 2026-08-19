@@ -43,26 +43,12 @@ export async function POST(req: NextRequest) {
 
     if (!supabaseAdmin) {
       return NextResponse.json(
-        { error: 'Database service role configuration missing. Please check server environment variables.' },
+        { error: 'Database service role configuration missing on server.' },
         { status: 500 }
       );
     }
 
-    // 2. Check if user with this email already exists in 'profiles' or Supabase Auth
-    const { data: existingProfiles, error: profileCheckError } = await supabaseAdmin
-      .from('profiles')
-      .select('id, email')
-      .eq('email', cleanedEmail)
-      .limit(1);
-
-    if (existingProfiles && existingProfiles.length > 0) {
-      return NextResponse.json(
-        { error: 'An account with this email address is already registered. Please sign in instead.' },
-        { status: 409 }
-      );
-    }
-
-    // 3. Create User in Supabase Auth securely (Password hashed automatically by Supabase Auth BCrypt)
+    // 2. Create User in Supabase Auth securely
     const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
       email: cleanedEmail,
       password: password,
@@ -75,10 +61,10 @@ export async function POST(req: NextRequest) {
     });
 
     if (authError) {
-      console.error('Supabase Auth User Creation Error:', authError);
+      console.error('Supabase Auth User Creation Error:', authError.message);
       
       const msg = authError.message || '';
-      if (msg.includes('already been registered') || msg.includes('already exists')) {
+      if (msg.includes('already been registered') || msg.includes('already exists') || msg.includes('duplicate')) {
         return NextResponse.json(
           { error: 'An account with this email address is already registered. Please sign in instead.' },
           { status: 409 }
@@ -92,7 +78,7 @@ export async function POST(req: NextRequest) {
       }
       
       return NextResponse.json(
-        { error: authError.message || 'Failed to create account in database.' },
+        { error: authError.message || 'Failed to create account.' },
         { status: 400 }
       );
     }
@@ -106,18 +92,19 @@ export async function POST(req: NextRequest) {
 
     const userId = authData.user.id;
 
-    // 4. Save User Profile in PostgreSQL 'profiles' table
-    const { error: profileUpsertError } = await supabaseAdmin.from('profiles').upsert({
-      id: userId,
-      email: cleanedEmail,
-      full_name: cleanedName,
-      role: 'Technician',
-      auth_provider: 'email',
-      updated_at: new Date().toISOString(),
-    });
-
-    if (profileUpsertError) {
-      console.warn('Profile DB upsert warning:', profileUpsertError.message);
+    // 3. Attempt saving User Profile in PostgreSQL 'profiles' table safely
+    try {
+      await supabaseAdmin.from('profiles').upsert({
+        id: userId,
+        email: cleanedEmail,
+        full_name: cleanedName,
+        role: 'Technician',
+        auth_provider: 'email',
+        updated_at: new Date().toISOString(),
+      });
+    } catch (dbError) {
+      // Table profiles might not exist yet; swallow warning to keep registration successful
+      console.warn('Optional profiles table sync skipped:', dbError);
     }
 
     return NextResponse.json({
